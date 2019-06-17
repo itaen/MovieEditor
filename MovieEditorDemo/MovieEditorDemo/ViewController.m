@@ -12,7 +12,8 @@
 #import <AVKit/AVKit.h>
 #import "GLEditPhotoModel.h"
 #import "GLEditConst.h"
-
+#import "GLLocalPhotoCompositionInstruction.h"
+#import "GLCustomVideoCompositor.h"
 
 @interface ViewController ()
 
@@ -22,26 +23,13 @@
 
 @implementation ViewController
 
-- (NSArray <UIImage *> *)demoImages {
-    NSMutableArray *array = [NSMutableArray arrayWithCapacity:10];
-    for (int i = 0; i < 10; i++) {
-        UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"%d.jpeg",i]];
-        [array addObject:image];
-    }
-    return [NSArray arrayWithArray:array];
-}
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    [self playWithCMTime];
-}
-
 - (void)playVideoWithItem:(AVPlayerItem *)item {
     if (self.videoPlayer.player) {
         [self.videoPlayer.player replaceCurrentItemWithPlayerItem:item];
     }else{
         [self.videoPlayer setPlayer:[AVPlayer playerWithPlayerItem:item]];
     }
+    
     
     [self.videoPlayer.player play];
     [self.navigationController pushViewController:self.videoPlayer animated:YES];
@@ -51,7 +39,7 @@
 //使用 AVAssetWriter 将图片写成视频
 - (IBAction)exportVideoWithAssetWriter:(UIButton *)sender {
     //1.目标视频文件的格式和尺寸
-    NSDictionary *options =  [PhotoToVideoUtil videoSettingsWithCodec:AVVideoCodecTypeH264 withWidth:kPhotoVideoWidth andHeight:kPhotoVideoHeight];
+    NSDictionary *options =  [PhotoToVideoUtil videoSettingsWithCodec:AVVideoCodecH264 withWidth:kPhotoVideoWidth andHeight:kPhotoVideoHeight];
     PhotoToVideoUtil *util = [[PhotoToVideoUtil alloc] initWithSettings:options];
     [SVProgressHUD show];
     
@@ -73,6 +61,7 @@
     model.resizePhotoData = UIImageJPEGRepresentation(image, 1.0);
     model.originPhotoData = UIImageJPEGRepresentation(image, 1.0);
     model.duration = 3.f;
+    model.type = GLPhotoAnimationPushRight;
     AVPlayerItem *item = [self buildPhotoVideoWithPhoto:model];
     [self playVideoWithItem:item];
 
@@ -98,9 +87,15 @@
     AVURLAsset *asset = [AVURLAsset URLAssetWithURL:[[NSBundle mainBundle] URLForResource:@"blank" withExtension:@"mp4"] options:options];
     AVAssetTrack *assetTrack = [[asset tracksWithMediaType:AVMediaTypeVideo] firstObject];
     [videoTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, CMTimeMakeWithSeconds(model.duration, 1000)) ofTrack:assetTrack atTime:kCMTimeZero error:nil];
+    videoComposition.customVideoCompositorClass = [GLCustomVideoCompositor class];
 
-    videoComposition.frameDuration = CMTimeMake(1, 60);
-    videoComposition.instructions = @[[AVMutableVideoCompositionInstruction videoCompositionInstruction]];
+    GLLocalPhotoCompositionInstruction *instruction = [[GLLocalPhotoCompositionInstruction alloc] initSourceTrackID:assetTrack.trackID forTimeRange:CMTimeRangeMake(kCMTimeZero, CMTimeMakeWithSeconds(model.duration, 10000))];
+    
+    instruction.resizePhotoData = model.resizePhotoData;
+    instruction.animationType = model.type;
+    videoComposition.instructions = @[instruction];
+    videoComposition.frameDuration = CMTimeMake(1, kPhotoVideoFPS);
+
     videoComposition.renderSize = CGSizeMake(kPhotoVideoWidth, kPhotoVideoHeight);
     
 }
@@ -221,5 +216,14 @@
 //    Which means a total duration of 16.667 seconds, with 10000 frames with a timescale of 600 frames per second.
 }
 
+
+- (NSArray <UIImage *> *)demoImages {
+    NSMutableArray *array = [NSMutableArray arrayWithCapacity:10];
+    for (int i = 0; i < 10; i++) {
+        UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"%d.jpeg",i]];
+        [array addObject:image];
+    }
+    return [NSArray arrayWithArray:array];
+}
 
 @end
