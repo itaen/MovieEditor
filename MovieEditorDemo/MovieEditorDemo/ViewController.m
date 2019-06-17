@@ -11,10 +11,7 @@
 #import "SVProgressHUD.h"
 #import <AVKit/AVKit.h>
 #import "GLEditPhotoModel.h"
-
-#define kPhotoVideoWidth              (720.f)
-#define kPhotoVideoHeight          (1280.f)
-
+#import "GLEditConst.h"
 
 
 @interface ViewController ()
@@ -155,30 +152,26 @@
 //    item.videoComposition = videoComposition;
     [self playVideoWithItem:item];
     
-//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-//    NSString *documentsDirectory = [paths objectAtIndex:0];
-//
-//    // Creating a full path and URL to the exported video
-//    NSString *outputVideoPath =  [documentsDirectory stringByAppendingPathComponent:
-//                                  [NSString stringWithFormat:@"mergeVideo-%d.mov",arc4random() % 1000]];
-//
-//    // NSString *documentsDirectory = [paths objectAtIndex:0];
-//    NSString *myPathDocs =  [documentsDirectory stringByAppendingPathComponent:
-//                             current_name];
-//    NSURL *outptVideoUrl = [NSURL fileURLWithPath:myPathDocs];
-//    AVAssetExportSession *exporter = [[AVAssetExportSession alloc] initWithAsset:mainComposition presetName:AVAssetExportPreset640x480];
-//
-//    // Setting attributes of the exporter
-//    exporter.outputURL=outptVideoUrl;
-//    exporter.outputFileType =AVFileTypeMPEG4;   //AVFileTypeQuickTimeMovie;
-//    exporter.shouldOptimizeForNetworkUse = YES;
-//    [exporter exportAsynchronouslyWithCompletionHandler:^{
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            //completion(exporter);
-//            [self exportDidFinish:exporter];
-//            // [self exportDidFinish:exporter:assets];
-//        });
-//    }];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *outputVideoPath =  [documentsDirectory stringByAppendingPathComponent:
+                                  [NSString stringWithFormat:@"mergeVideo-%d.mov",arc4random() % 1000]];
+
+	NSURL *outptVideoUrl = [NSURL fileURLWithPath:outputVideoPath];
+    AVAssetExportSession *exporter = [[AVAssetExportSession alloc] initWithAsset:mainComposition presetName:AVAssetExportPreset1280x720];
+
+    exporter.outputURL=outptVideoUrl;
+    exporter.outputFileType =AVFileTypeMPEG4;   //AVFileTypeQuickTimeMovie;
+    exporter.shouldOptimizeForNetworkUse = YES;
+	[SVProgressHUD show];
+	[exporter exportAsynchronouslyWithCompletionHandler:^{
+        dispatch_async(dispatch_get_main_queue(), ^{
+			if(exporter.status == AVAssetExportSessionStatusCompleted){
+				[SVProgressHUD dismiss];
+				UISaveVideoAtPathToSavedPhotosAlbum(outputVideoPath, nil, nil, nil);
+			}
+        });
+    }];
 }
 
 - (IBAction)addMultipleMusicTrackToVideo:(UIButton *)sender {
@@ -192,20 +185,6 @@
 - (IBAction)addFilterToVideo:(UIButton *)sender {
     
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

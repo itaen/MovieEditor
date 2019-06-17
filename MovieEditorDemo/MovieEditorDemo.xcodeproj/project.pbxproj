@@ -29,15 +29,36 @@
 		B86235E722B62E1100E2CE33 /* 3.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = B86235E222B62E0E00E2CE33 /* 3.jpeg */; };
 		B86235E822B62E1100E2CE33 /* 7.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = B86235E322B62E1100E2CE33 /* 7.jpeg */; };
 		B86235E922B62E1100E2CE33 /* 8.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = B86235E422B62E1100E2CE33 /* 8.jpeg */; };
-		B86235EC22B69E8D00E2CE33 /* MovieEditorBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = B86235EB22B69E8D00E2CE33 /* MovieEditorBuilder.m */; };
-		B86235F922B6A6AF00E2CE33 /* GLEditPhotoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B86235F022B6A6AF00E2CE33 /* GLEditPhotoModel.m */; };
-		B86235FA22B6A6AF00E2CE33 /* GLEditBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B86235F122B6A6AF00E2CE33 /* GLEditBaseModel.m */; };
-		B86235FB22B6A6AF00E2CE33 /* GLEditVideoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B86235F222B6A6AF00E2CE33 /* GLEditVideoModel.m */; };
-		B86235FC22B6A6AF00E2CE33 /* GLEditAudioModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B86235F622B6A6AF00E2CE33 /* GLEditAudioModel.m */; };
-		B86235FD22B6A6AF00E2CE33 /* GLEditTransitionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B86235F722B6A6AF00E2CE33 /* GLEditTransitionModel.m */; };
 		B862360122B6AA4F00E2CE33 /* blank.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = B862360022B6A7EE00E2CE33 /* blank.mp4 */; };
 		B862360722B6ADFB00E2CE33 /* clip1.mov in Resources */ = {isa = PBXBuildFile; fileRef = B862360522B6ADE200E2CE33 /* clip1.mov */; };
 		B862360822B6ADFB00E2CE33 /* clip2.mov in Resources */ = {isa = PBXBuildFile; fileRef = B862360622B6ADFB00E2CE33 /* clip2.mov */; };
+		B8F0096322B7C17C00229B23 /* GLFilterVideoCompositionInstruction.m in Sources */ = {isa = PBXBuildFile; fileRef = B8F0090E22B7C17C00229B23 /* GLFilterVideoCompositionInstruction.m */; };
+		B8F0096422B7C17C00229B23 /* GLPassthroughVideoCompositionInstruction.m in Sources */ = {isa = PBXBuildFile; fileRef = B8F0091222B7C17C00229B23 /* GLPassthroughVideoCompositionInstruction.m */; };
+		B8F0096522B7C17C00229B23 /* GLBaseCustomVideoCompositionInsruction.m in Sources */ = {isa = PBXBuildFile; fileRef = B8F0091422B7C17C00229B23 /* GLBaseCustomVideoCompositionInsruction.m */; };
+		B8F0096622B7C17C00229B23 /* GLTransitionVideoCompositionInstruction.m in Sources */ = {isa = PBXBuildFile; fileRef = B8F0091522B7C17C00229B23 /* GLTransitionVideoCompositionInstruction.m */; };
+		B8F0096722B7C17C00229B23 /* GLLocalPhotoCompositionInstruction.m in Sources */ = {isa = PBXBuildFile; fileRef = B8F0091622B7C17C00229B23 /* GLLocalPhotoCompositionInstruction.m */; };
+		B8F0096822B7C17C00229B23 /* GLCustomVideoCompositor.m in Sources */ = {isa = PBXBuildFile; fileRef = B8F0091822B7C17C00229B23 /* GLCustomVideoCompositor.m */; };
+		B8F0096922B7C17C00229B23 /* GLLocalVideoCompositionInstruction.m in Sources */ = {isa = PBXBuildFile; fileRef = B8F0091B22B7C17C00229B23 /* GLLocalVideoCompositionInstruction.m */; };
+		B8F0096A22B7C17C00229B23 /* GLMovieEditorBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = B8F0091C22B7C17C00229B23 /* GLMovieEditorBuilder.m */; };
+		B8F0096B22B7C17C00229B23 /* GLCustomTransitionRender.m in Sources */ = {isa = PBXBuildFile; fileRef = B8F0092022B7C17C00229B23 /* GLCustomTransitionRender.m */; };
+		B8F0096C22B7C17C00229B23 /* GLCustomFilterRender.m in Sources */ = {isa = PBXBuildFile; fileRef = B8F0092122B7C17C00229B23 /* GLCustomFilterRender.m */; };
+		B8F0096D22B7C17C00229B23 /* lookup_amatorka.png in Resources */ = {isa = PBXBuildFile; fileRef = B8F0092422B7C17C00229B23 /* lookup_amatorka.png */; };
+		B8F0096E22B7C17C00229B23 /* lookup_黑白.png in Resources */ = {isa = PBXBuildFile; fileRef = B8F0092522B7C17C00229B23 /* lookup_黑白.png */; };
+		B8F0096F22B7C17C00229B23 /* color1.png in Resources */ = {isa = PBXBuildFile; fileRef = B8F0092622B7C17C00229B23 /* color1.png */; };
+		B8F0097022B7C17C00229B23 /* TransitionVertex.glsl in Resources */ = {isa = PBXBuildFile; fileRef = B8F0092722B7C17C00229B23 /* TransitionVertex.glsl */; };
+		B8F0097122B7C17C00229B23 /* color2.png in Resources */ = {isa = PBXBuildFile; fileRef = B8F0092822B7C17C00229B23 /* color2.png */; };
+		B8F0097222B7C17C00229B23 /* FilterFrag.glsl in Resources */ = {isa = PBXBuildFile; fileRef = B8F0092922B7C17C00229B23 /* FilterFrag.glsl */; };
+		B8F0097522B7C17C00229B23 /* blank.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = B8F0092C22B7C17C00229B23 /* blank.mp4 */; };
+		B8F0097622B7C17C00229B23 /* color.png in Resources */ = {isa = PBXBuildFile; fileRef = B8F0092D22B7C17C00229B23 /* color.png */; };
+		B8F0097722B7C17C00229B23 /* TransitionFrag.glsl in Resources */ = {isa = PBXBuildFile; fileRef = B8F0092E22B7C17C00229B23 /* TransitionFrag.glsl */; };
+		B8F0097822B7C17C00229B23 /* FilterVertex.glsl in Resources */ = {isa = PBXBuildFile; fileRef = B8F0092F22B7C17C00229B23 /* FilterVertex.glsl */; };
+		B8F0097922B7C17C00229B23 /* GLEditPhotoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B8F0093222B7C17C00229B23 /* GLEditPhotoModel.m */; };
+		B8F0097A22B7C17C00229B23 /* GLEditBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B8F0093322B7C17C00229B23 /* GLEditBaseModel.m */; };
+		B8F0097B22B7C17C00229B23 /* GLEditVideoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B8F0093422B7C17C00229B23 /* GLEditVideoModel.m */; };
+		B8F0097C22B7C17C00229B23 /* GLEditAudioModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B8F0093822B7C17C00229B23 /* GLEditAudioModel.m */; };
+		B8F0097D22B7C17C00229B23 /* GLEditTransitionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B8F0093922B7C17C00229B23 /* GLEditTransitionModel.m */; };
+		B8F0098C22B7C17C00229B23 /* GLEditConst.m in Sources */ = {isa = PBXBuildFile; fileRef = B8F0096122B7C17C00229B23 /* GLEditConst.m */; };
+		B8F0098D22B7C17C00229B23 /* GLMovieEditorUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = B8F0096222B7C17C00229B23 /* GLMovieEditorUtil.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,22 +93,55 @@
 		B86235E222B62E0E00E2CE33 /* 3.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 3.jpeg; sourceTree = "<group>"; };
 		B86235E322B62E1100E2CE33 /* 7.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 7.jpeg; sourceTree = "<group>"; };
 		B86235E422B62E1100E2CE33 /* 8.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 8.jpeg; sourceTree = "<group>"; };
-		B86235EA22B69E8D00E2CE33 /* MovieEditorBuilder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MovieEditorBuilder.h; sourceTree = "<group>"; };
-		B86235EB22B69E8D00E2CE33 /* MovieEditorBuilder.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MovieEditorBuilder.m; sourceTree = "<group>"; };
-		B86235EF22B6A6AF00E2CE33 /* GLEditAudioModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLEditAudioModel.h; sourceTree = "<group>"; };
-		B86235F022B6A6AF00E2CE33 /* GLEditPhotoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLEditPhotoModel.m; sourceTree = "<group>"; };
-		B86235F122B6A6AF00E2CE33 /* GLEditBaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLEditBaseModel.m; sourceTree = "<group>"; };
-		B86235F222B6A6AF00E2CE33 /* GLEditVideoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLEditVideoModel.m; sourceTree = "<group>"; };
-		B86235F322B6A6AF00E2CE33 /* GLEditTransitionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLEditTransitionModel.h; sourceTree = "<group>"; };
-		B86235F422B6A6AF00E2CE33 /* GLEditBaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLEditBaseModel.h; sourceTree = "<group>"; };
-		B86235F522B6A6AF00E2CE33 /* GLEditPhotoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLEditPhotoModel.h; sourceTree = "<group>"; };
-		B86235F622B6A6AF00E2CE33 /* GLEditAudioModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLEditAudioModel.m; sourceTree = "<group>"; };
-		B86235F722B6A6AF00E2CE33 /* GLEditTransitionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLEditTransitionModel.m; sourceTree = "<group>"; };
-		B86235F822B6A6AF00E2CE33 /* GLEditVideoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLEditVideoModel.h; sourceTree = "<group>"; };
-		B86235FE22B6A6E100E2CE33 /* GLEditEnums.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GLEditEnums.h; sourceTree = "<group>"; };
 		B862360022B6A7EE00E2CE33 /* blank.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = blank.mp4; sourceTree = "<group>"; };
 		B862360522B6ADE200E2CE33 /* clip1.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = clip1.mov; sourceTree = "<group>"; };
 		B862360622B6ADFB00E2CE33 /* clip2.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = clip2.mov; sourceTree = "<group>"; };
+		B8F0090B22B7B94800229B23 /* music1.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = music1.m4a; sourceTree = "<group>"; };
+		B8F0090E22B7C17C00229B23 /* GLFilterVideoCompositionInstruction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLFilterVideoCompositionInstruction.m; sourceTree = "<group>"; };
+		B8F0090F22B7C17C00229B23 /* GLCustomVideoCompositor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLCustomVideoCompositor.h; sourceTree = "<group>"; };
+		B8F0091022B7C17C00229B23 /* GLLocalPhotoCompositionInstruction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLLocalPhotoCompositionInstruction.h; sourceTree = "<group>"; };
+		B8F0091122B7C17C00229B23 /* GLTransitionVideoCompositionInstruction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLTransitionVideoCompositionInstruction.h; sourceTree = "<group>"; };
+		B8F0091222B7C17C00229B23 /* GLPassthroughVideoCompositionInstruction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLPassthroughVideoCompositionInstruction.m; sourceTree = "<group>"; };
+		B8F0091322B7C17C00229B23 /* GLLocalVideoCompositionInstruction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLLocalVideoCompositionInstruction.h; sourceTree = "<group>"; };
+		B8F0091422B7C17C00229B23 /* GLBaseCustomVideoCompositionInsruction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLBaseCustomVideoCompositionInsruction.m; sourceTree = "<group>"; };
+		B8F0091522B7C17C00229B23 /* GLTransitionVideoCompositionInstruction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLTransitionVideoCompositionInstruction.m; sourceTree = "<group>"; };
+		B8F0091622B7C17C00229B23 /* GLLocalPhotoCompositionInstruction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLLocalPhotoCompositionInstruction.m; sourceTree = "<group>"; };
+		B8F0091722B7C17C00229B23 /* GLFilterVideoCompositionInstruction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLFilterVideoCompositionInstruction.h; sourceTree = "<group>"; };
+		B8F0091822B7C17C00229B23 /* GLCustomVideoCompositor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLCustomVideoCompositor.m; sourceTree = "<group>"; };
+		B8F0091922B7C17C00229B23 /* GLPassthroughVideoCompositionInstruction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLPassthroughVideoCompositionInstruction.h; sourceTree = "<group>"; };
+		B8F0091A22B7C17C00229B23 /* GLBaseCustomVideoCompositionInsruction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLBaseCustomVideoCompositionInsruction.h; sourceTree = "<group>"; };
+		B8F0091B22B7C17C00229B23 /* GLLocalVideoCompositionInstruction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLLocalVideoCompositionInstruction.m; sourceTree = "<group>"; };
+		B8F0091C22B7C17C00229B23 /* GLMovieEditorBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLMovieEditorBuilder.m; sourceTree = "<group>"; };
+		B8F0091E22B7C17C00229B23 /* GLCustomTransitionRender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLCustomTransitionRender.h; sourceTree = "<group>"; };
+		B8F0091F22B7C17C00229B23 /* GLCustomFilterRender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLCustomFilterRender.h; sourceTree = "<group>"; };
+		B8F0092022B7C17C00229B23 /* GLCustomTransitionRender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLCustomTransitionRender.m; sourceTree = "<group>"; };
+		B8F0092122B7C17C00229B23 /* GLCustomFilterRender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLCustomFilterRender.m; sourceTree = "<group>"; };
+		B8F0092422B7C17C00229B23 /* lookup_amatorka.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lookup_amatorka.png; sourceTree = "<group>"; };
+		B8F0092522B7C17C00229B23 /* lookup_黑白.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lookup_黑白.png"; sourceTree = "<group>"; };
+		B8F0092622B7C17C00229B23 /* color1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = color1.png; sourceTree = "<group>"; };
+		B8F0092722B7C17C00229B23 /* TransitionVertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TransitionVertex.glsl; sourceTree = "<group>"; };
+		B8F0092822B7C17C00229B23 /* color2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = color2.png; sourceTree = "<group>"; };
+		B8F0092922B7C17C00229B23 /* FilterFrag.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FilterFrag.glsl; sourceTree = "<group>"; };
+		B8F0092C22B7C17C00229B23 /* blank.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = blank.mp4; sourceTree = "<group>"; };
+		B8F0092D22B7C17C00229B23 /* color.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = color.png; sourceTree = "<group>"; };
+		B8F0092E22B7C17C00229B23 /* TransitionFrag.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TransitionFrag.glsl; sourceTree = "<group>"; };
+		B8F0092F22B7C17C00229B23 /* FilterVertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FilterVertex.glsl; sourceTree = "<group>"; };
+		B8F0093122B7C17C00229B23 /* GLEditAudioModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLEditAudioModel.h; sourceTree = "<group>"; };
+		B8F0093222B7C17C00229B23 /* GLEditPhotoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLEditPhotoModel.m; sourceTree = "<group>"; };
+		B8F0093322B7C17C00229B23 /* GLEditBaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLEditBaseModel.m; sourceTree = "<group>"; };
+		B8F0093422B7C17C00229B23 /* GLEditVideoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLEditVideoModel.m; sourceTree = "<group>"; };
+		B8F0093522B7C17C00229B23 /* GLEditTransitionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLEditTransitionModel.h; sourceTree = "<group>"; };
+		B8F0093622B7C17C00229B23 /* GLEditBaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLEditBaseModel.h; sourceTree = "<group>"; };
+		B8F0093722B7C17C00229B23 /* GLEditPhotoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLEditPhotoModel.h; sourceTree = "<group>"; };
+		B8F0093822B7C17C00229B23 /* GLEditAudioModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLEditAudioModel.m; sourceTree = "<group>"; };
+		B8F0093922B7C17C00229B23 /* GLEditTransitionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLEditTransitionModel.m; sourceTree = "<group>"; };
+		B8F0093A22B7C17C00229B23 /* GLEditVideoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLEditVideoModel.h; sourceTree = "<group>"; };
+		B8F0093B22B7C17C00229B23 /* GLMovieEditorBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLMovieEditorBuilder.h; sourceTree = "<group>"; };
+		B8F0095E22B7C17C00229B23 /* GLEditConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLEditConst.h; sourceTree = "<group>"; };
+		B8F0095F22B7C17C00229B23 /* GLMovieEditorUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLMovieEditorUtil.h; sourceTree = "<group>"; };
+		B8F0096022B7C17C00229B23 /* GLEditEnums.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLEditEnums.h; sourceTree = "<group>"; };
+		B8F0096122B7C17C00229B23 /* GLEditConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLEditConst.m; sourceTree = "<group>"; };
+		B8F0096222B7C17C00229B23 /* GLMovieEditorUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLMovieEditorUtil.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,17 +174,10 @@
 		B862359822B5E9C200E2CE33 /* MovieEditorDemo */ = {
 			isa = PBXGroup;
 			children = (
-				B86235FF22B6A6E400E2CE33 /* GLMovieEditor */,
-				B862359922B5E9C200E2CE33 /* AppDelegate.h */,
-				B862359A22B5E9C200E2CE33 /* AppDelegate.m */,
 				B862359C22B5E9C200E2CE33 /* ViewController.h */,
 				B862359D22B5E9C200E2CE33 /* ViewController.m */,
-				B86235C922B62A3400E2CE33 /* demoImages */,
-				B862359F22B5E9C200E2CE33 /* Main.storyboard */,
-				B86235EA22B69E8D00E2CE33 /* MovieEditorBuilder.h */,
-				B86235EB22B69E8D00E2CE33 /* MovieEditorBuilder.m */,
-				B86235AF22B5ED4F00E2CE33 /* PhotoToVideoUtil.h */,
-				B86235B022B5ED4F00E2CE33 /* PhotoToVideoUtil.m */,
+				B8F0098E22B7C5A900229B23 /* AVAssetWriterDemo */,
+				B8F0090C22B7C17C00229B23 /* MovieEditorDemo */,
 				B86235ED22B69EC200E2CE33 /* Support Files */,
 			);
 			path = MovieEditorDemo;
@@ -172,6 +219,11 @@
 		B86235ED22B69EC200E2CE33 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
+				B862359922B5E9C200E2CE33 /* AppDelegate.h */,
+				B862359A22B5E9C200E2CE33 /* AppDelegate.m */,
+				B86235C922B62A3400E2CE33 /* demoImages */,
+				B862359F22B5E9C200E2CE33 /* Main.storyboard */,
+				B8F0090B22B7B94800229B23 /* music1.m4a */,
 				B862360522B6ADE200E2CE33 /* clip1.mov */,
 				B862360622B6ADFB00E2CE33 /* clip2.mov */,
 				B862360022B6A7EE00E2CE33 /* blank.mp4 */,
@@ -184,30 +236,113 @@
 			path = "Support Files";
 			sourceTree = "<group>";
 		};
-		B86235EE22B6A6AF00E2CE33 /* Models */ = {
+		B8F0090C22B7C17C00229B23 /* MovieEditorDemo */ = {
 			isa = PBXGroup;
 			children = (
-				B86235EF22B6A6AF00E2CE33 /* GLEditAudioModel.h */,
-				B86235F022B6A6AF00E2CE33 /* GLEditPhotoModel.m */,
-				B86235F122B6A6AF00E2CE33 /* GLEditBaseModel.m */,
-				B86235F222B6A6AF00E2CE33 /* GLEditVideoModel.m */,
-				B86235F322B6A6AF00E2CE33 /* GLEditTransitionModel.h */,
-				B86235F422B6A6AF00E2CE33 /* GLEditBaseModel.h */,
-				B86235F522B6A6AF00E2CE33 /* GLEditPhotoModel.h */,
-				B86235F622B6A6AF00E2CE33 /* GLEditAudioModel.m */,
-				B86235F722B6A6AF00E2CE33 /* GLEditTransitionModel.m */,
-				B86235F822B6A6AF00E2CE33 /* GLEditVideoModel.h */,
+				B8F0093B22B7C17C00229B23 /* GLMovieEditorBuilder.h */,
+				B8F0091C22B7C17C00229B23 /* GLMovieEditorBuilder.m */,
+				B8F0095D22B7C17C00229B23 /* Helper */,
+				B8F0090D22B7C17C00229B23 /* Instructions */,
+				B8F0093022B7C17C00229B23 /* Models */,
+				B8F0091D22B7C17C00229B23 /* Renders */,
+				B8F0092222B7C17C00229B23 /* Resources */,
+			);
+			path = MovieEditorDemo;
+			sourceTree = "<group>";
+		};
+		B8F0090D22B7C17C00229B23 /* Instructions */ = {
+			isa = PBXGroup;
+			children = (
+				B8F0091A22B7C17C00229B23 /* GLBaseCustomVideoCompositionInsruction.h */,
+				B8F0091422B7C17C00229B23 /* GLBaseCustomVideoCompositionInsruction.m */,
+				B8F0090F22B7C17C00229B23 /* GLCustomVideoCompositor.h */,
+				B8F0091822B7C17C00229B23 /* GLCustomVideoCompositor.m */,
+				B8F0091722B7C17C00229B23 /* GLFilterVideoCompositionInstruction.h */,
+				B8F0090E22B7C17C00229B23 /* GLFilterVideoCompositionInstruction.m */,
+				B8F0091022B7C17C00229B23 /* GLLocalPhotoCompositionInstruction.h */,
+				B8F0091622B7C17C00229B23 /* GLLocalPhotoCompositionInstruction.m */,
+				B8F0091322B7C17C00229B23 /* GLLocalVideoCompositionInstruction.h */,
+				B8F0091B22B7C17C00229B23 /* GLLocalVideoCompositionInstruction.m */,
+				B8F0091922B7C17C00229B23 /* GLPassthroughVideoCompositionInstruction.h */,
+				B8F0091222B7C17C00229B23 /* GLPassthroughVideoCompositionInstruction.m */,
+				B8F0091122B7C17C00229B23 /* GLTransitionVideoCompositionInstruction.h */,
+				B8F0091522B7C17C00229B23 /* GLTransitionVideoCompositionInstruction.m */,
+			);
+			path = Instructions;
+			sourceTree = "<group>";
+		};
+		B8F0091D22B7C17C00229B23 /* Renders */ = {
+			isa = PBXGroup;
+			children = (
+				B8F0091F22B7C17C00229B23 /* GLCustomFilterRender.h */,
+				B8F0092122B7C17C00229B23 /* GLCustomFilterRender.m */,
+				B8F0091E22B7C17C00229B23 /* GLCustomTransitionRender.h */,
+				B8F0092022B7C17C00229B23 /* GLCustomTransitionRender.m */,
+			);
+			path = Renders;
+			sourceTree = "<group>";
+		};
+		B8F0092222B7C17C00229B23 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B8F0092C22B7C17C00229B23 /* blank.mp4 */,
+				B8F0092D22B7C17C00229B23 /* color.png */,
+				B8F0092622B7C17C00229B23 /* color1.png */,
+				B8F0092822B7C17C00229B23 /* color2.png */,
+				B8F0092922B7C17C00229B23 /* FilterFrag.glsl */,
+				B8F0092322B7C17C00229B23 /* filters */,
+				B8F0092F22B7C17C00229B23 /* FilterVertex.glsl */,
+				B8F0092E22B7C17C00229B23 /* TransitionFrag.glsl */,
+				B8F0092722B7C17C00229B23 /* TransitionVertex.glsl */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		B8F0092322B7C17C00229B23 /* filters */ = {
+			isa = PBXGroup;
+			children = (
+				B8F0092422B7C17C00229B23 /* lookup_amatorka.png */,
+				B8F0092522B7C17C00229B23 /* lookup_黑白.png */,
+			);
+			path = filters;
+			sourceTree = "<group>";
+		};
+		B8F0093022B7C17C00229B23 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B8F0093122B7C17C00229B23 /* GLEditAudioModel.h */,
+				B8F0093822B7C17C00229B23 /* GLEditAudioModel.m */,
+				B8F0093622B7C17C00229B23 /* GLEditBaseModel.h */,
+				B8F0093322B7C17C00229B23 /* GLEditBaseModel.m */,
+				B8F0093722B7C17C00229B23 /* GLEditPhotoModel.h */,
+				B8F0093222B7C17C00229B23 /* GLEditPhotoModel.m */,
+				B8F0093522B7C17C00229B23 /* GLEditTransitionModel.h */,
+				B8F0093922B7C17C00229B23 /* GLEditTransitionModel.m */,
+				B8F0093A22B7C17C00229B23 /* GLEditVideoModel.h */,
+				B8F0093422B7C17C00229B23 /* GLEditVideoModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
 		};
-		B86235FF22B6A6E400E2CE33 /* GLMovieEditor */ = {
+		B8F0095D22B7C17C00229B23 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
-				B86235FE22B6A6E100E2CE33 /* GLEditEnums.h */,
-				B86235EE22B6A6AF00E2CE33 /* Models */,
+				B8F0095E22B7C17C00229B23 /* GLEditConst.h */,
+				B8F0096122B7C17C00229B23 /* GLEditConst.m */,
+				B8F0096022B7C17C00229B23 /* GLEditEnums.h */,
+				B8F0095F22B7C17C00229B23 /* GLMovieEditorUtil.h */,
+				B8F0096222B7C17C00229B23 /* GLMovieEditorUtil.m */,
 			);
-			path = GLMovieEditor;
+			path = Helper;
+			sourceTree = "<group>";
+		};
+		B8F0098E22B7C5A900229B23 /* AVAssetWriterDemo */ = {
+			isa = PBXGroup;
+			children = (
+				B86235AF22B5ED4F00E2CE33 /* PhotoToVideoUtil.h */,
+				B86235B022B5ED4F00E2CE33 /* PhotoToVideoUtil.m */,
+			);
+			path = AVAssetWriterDemo;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -267,17 +402,27 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B8F0097622B7C17C00229B23 /* color.png in Resources */,
+				B8F0096E22B7C17C00229B23 /* lookup_黑白.png in Resources */,
+				B8F0097022B7C17C00229B23 /* TransitionVertex.glsl in Resources */,
+				B8F0097122B7C17C00229B23 /* color2.png in Resources */,
 				B86235E922B62E1100E2CE33 /* 8.jpeg in Resources */,
 				B86235E822B62E1100E2CE33 /* 7.jpeg in Resources */,
 				B862360722B6ADFB00E2CE33 /* clip1.mov in Resources */,
+				B8F0096D22B7C17C00229B23 /* lookup_amatorka.png in Resources */,
+				B8F0097522B7C17C00229B23 /* blank.mp4 in Resources */,
+				B8F0096F22B7C17C00229B23 /* color1.png in Resources */,
 				B862360122B6AA4F00E2CE33 /* blank.mp4 in Resources */,
 				B86235E522B62E1100E2CE33 /* 4.jpeg in Resources */,
+				B8F0097722B7C17C00229B23 /* TransitionFrag.glsl in Resources */,
 				B86235C722B6285700E2CE33 /* SVProgressHUD.bundle in Resources */,
 				B862360822B6ADFB00E2CE33 /* clip2.mov in Resources */,
 				B86235D622B62A4A00E2CE33 /* 0.jpeg in Resources */,
 				B86235DD22B62A4A00E2CE33 /* 2.jpeg in Resources */,
 				B86235A622B5E9C300E2CE33 /* LaunchScreen.storyboard in Resources */,
+				B8F0097222B7C17C00229B23 /* FilterFrag.glsl in Resources */,
 				B86235DB22B62A4A00E2CE33 /* 1.jpeg in Resources */,
+				B8F0097822B7C17C00229B23 /* FilterVertex.glsl in Resources */,
 				B86235E622B62E1100E2CE33 /* 6.jpeg in Resources */,
 				B86235D522B62A4A00E2CE33 /* 9.jpeg in Resources */,
 				B86235A322B5E9C300E2CE33 /* Assets.xcassets in Resources */,
@@ -295,18 +440,29 @@
 			buildActionMask = 2147483647;
 			files = (
 				B862359E22B5E9C200E2CE33 /* ViewController.m in Sources */,
+				B8F0096722B7C17C00229B23 /* GLLocalPhotoCompositionInstruction.m in Sources */,
+				B8F0097B22B7C17C00229B23 /* GLEditVideoModel.m in Sources */,
 				B86235C522B6285700E2CE33 /* SVProgressHUD.m in Sources */,
-				B86235FB22B6A6AF00E2CE33 /* GLEditVideoModel.m in Sources */,
+				B8F0096522B7C17C00229B23 /* GLBaseCustomVideoCompositionInsruction.m in Sources */,
+				B8F0096C22B7C17C00229B23 /* GLCustomFilterRender.m in Sources */,
 				B86235C622B6285700E2CE33 /* SVIndefiniteAnimatedView.m in Sources */,
+				B8F0098C22B7C17C00229B23 /* GLEditConst.m in Sources */,
+				B8F0098D22B7C17C00229B23 /* GLMovieEditorUtil.m in Sources */,
+				B8F0096922B7C17C00229B23 /* GLLocalVideoCompositionInstruction.m in Sources */,
+				B8F0097C22B7C17C00229B23 /* GLEditAudioModel.m in Sources */,
 				B86235C322B6285700E2CE33 /* SVRadialGradientLayer.m in Sources */,
-				B86235FD22B6A6AF00E2CE33 /* GLEditTransitionModel.m in Sources */,
-				B86235FA22B6A6AF00E2CE33 /* GLEditBaseModel.m in Sources */,
+				B8F0096322B7C17C00229B23 /* GLFilterVideoCompositionInstruction.m in Sources */,
+				B8F0096822B7C17C00229B23 /* GLCustomVideoCompositor.m in Sources */,
+				B8F0097D22B7C17C00229B23 /* GLEditTransitionModel.m in Sources */,
+				B8F0096A22B7C17C00229B23 /* GLMovieEditorBuilder.m in Sources */,
+				B8F0096622B7C17C00229B23 /* GLTransitionVideoCompositionInstruction.m in Sources */,
 				B86235A922B5E9C300E2CE33 /* main.m in Sources */,
-				B86235F922B6A6AF00E2CE33 /* GLEditPhotoModel.m in Sources */,
+				B8F0096B22B7C17C00229B23 /* GLCustomTransitionRender.m in Sources */,
 				B86235C422B6285700E2CE33 /* SVProgressAnimatedView.m in Sources */,
 				B862359B22B5E9C200E2CE33 /* AppDelegate.m in Sources */,
-				B86235EC22B69E8D00E2CE33 /* MovieEditorBuilder.m in Sources */,
-				B86235FC22B6A6AF00E2CE33 /* GLEditAudioModel.m in Sources */,
+				B8F0097922B7C17C00229B23 /* GLEditPhotoModel.m in Sources */,
+				B8F0096422B7C17C00229B23 /* GLPassthroughVideoCompositionInstruction.m in Sources */,
+				B8F0097A22B7C17C00229B23 /* GLEditBaseModel.m in Sources */,
 				B86235B122B5ED4F00E2CE33 /* PhotoToVideoUtil.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -452,6 +608,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6QRWM94KKM;
 				INFOPLIST_FILE = "$(SRCROOT)/MovieEditorDemo/Support Files/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -469,6 +626,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6QRWM94KKM;
 				INFOPLIST_FILE = "$(SRCROOT)/MovieEditorDemo/Support Files/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
