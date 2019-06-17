@@ -48,7 +48,6 @@
 		B8F0097022B7C17C00229B23 /* TransitionVertex.glsl in Resources */ = {isa = PBXBuildFile; fileRef = B8F0092722B7C17C00229B23 /* TransitionVertex.glsl */; };
 		B8F0097122B7C17C00229B23 /* color2.png in Resources */ = {isa = PBXBuildFile; fileRef = B8F0092822B7C17C00229B23 /* color2.png */; };
 		B8F0097222B7C17C00229B23 /* FilterFrag.glsl in Resources */ = {isa = PBXBuildFile; fileRef = B8F0092922B7C17C00229B23 /* FilterFrag.glsl */; };
-		B8F0097522B7C17C00229B23 /* blank.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = B8F0092C22B7C17C00229B23 /* blank.mp4 */; };
 		B8F0097622B7C17C00229B23 /* color.png in Resources */ = {isa = PBXBuildFile; fileRef = B8F0092D22B7C17C00229B23 /* color.png */; };
 		B8F0097722B7C17C00229B23 /* TransitionFrag.glsl in Resources */ = {isa = PBXBuildFile; fileRef = B8F0092E22B7C17C00229B23 /* TransitionFrag.glsl */; };
 		B8F0097822B7C17C00229B23 /* FilterVertex.glsl in Resources */ = {isa = PBXBuildFile; fileRef = B8F0092F22B7C17C00229B23 /* FilterVertex.glsl */; };
@@ -410,7 +409,6 @@
 				B86235E822B62E1100E2CE33 /* 7.jpeg in Resources */,
 				B862360722B6ADFB00E2CE33 /* clip1.mov in Resources */,
 				B8F0096D22B7C17C00229B23 /* lookup_amatorka.png in Resources */,
-				B8F0097522B7C17C00229B23 /* blank.mp4 in Resources */,
 				B8F0096F22B7C17C00229B23 /* color1.png in Resources */,
 				B862360122B6AA4F00E2CE33 /* blank.mp4 in Resources */,
 				B86235E522B62E1100E2CE33 /* 4.jpeg in Resources */,
