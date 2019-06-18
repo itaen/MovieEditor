@@ -80,6 +80,7 @@ enum
     glGenFramebuffers(1, &_offscreenBufferHandle);
     glBindFramebuffer(GL_FRAMEBUFFER, _offscreenBufferHandle);
 }
+
 -(BOOL)loadVertexShader:(NSURL *)vertexURL AndFragShader:(NSURL *)fragURL{
     GLuint vertShader,fragShader;
     _program = glCreateProgram();
@@ -145,6 +146,7 @@ enum
     
     return YES;
 }
+
 - (BOOL)compileShader:(GLuint *)shader type:(GLenum)type URL:(NSURL *)URL
 {
     NSError *error;
@@ -283,6 +285,7 @@ enum
     }
   
 }
+
 -(CVOpenGLESTextureRef)sourceTextureForPixelBuffer:(CVPixelBufferRef)pixelBuffer
 {
     CVOpenGLESTextureRef sourceTexture = NULL;
@@ -301,6 +304,7 @@ enum
 bail:
     return sourceTexture;
 }
+
 - (void)dealloc
 {
     NSLog(@"render dealloc ========================================");

@@ -345,6 +345,24 @@ enum
 
 }
 
+//在实际应用中，我们需要使用各种各样的缓存。比如在纹理渲染之前，需要生成一块保存了图像数据的纹理缓存。下面介绍一下缓存管理的一般步骤：
+//
+//使用缓存的过程可以分为 7 步：
+//
+//生成（Generate）：生成缓存标识符 glGenBuffers()
+//
+//绑定（Bind）：对接下来的操作，绑定一个缓存 glBindBuffer()
+//
+//缓存数据（Buffer Data）：从CPU的内存复制数据到缓存的内存 glBufferData() / glBufferSubData()
+//
+//启用（Enable）或者禁止（Disable）：设置在接下来的渲染中是否要使用缓存的数据 glEnableVertexAttribArray() / glDisableVertexAttribArray()
+//
+//设置指针（Set Pointers）：告知缓存的数据类型，及相应数据的偏移量 glVertexAttribPointer()
+//
+//绘图（Draw）：使用缓存的数据进行绘制 glDrawArrays() / glDrawElements()
+//
+//删除（Delete）：删除缓存，释放资源 glDeleteBuffers()
+
 -(void)renderPxielBuffer:(CVPixelBufferRef)destinationPixelBuffer usingSourceBuffer:(CVPixelBufferRef)sourcePixelBuffer time:(CGFloat)time photoData:(NSData *)photoData tween:(float)tween type:(GLPhotoAnimationType)type
 {
 	[[NSNotificationCenter defaultCenter] postNotificationName:GLLocalPhotoRenderProgressNotification object:@(tween) userInfo:@{@"imageData":photoData}];
@@ -393,6 +411,7 @@ enum
             0.0, 0.25 * tween,
             1.0, 0.25 * tween,
         };
+		glVertexAttribPointer(ATTRIB_TEXCOORD, 2, GL_FLOAT, 0, 0, quadTextureData1);
         }
             break;
         case GLPhotoAnimationPushTop:
@@ -403,6 +422,8 @@ enum
             0.0, 0.25 * (1 - tween),
             1.0, 0.25 * (1 - tween),
         };
+		glVertexAttribPointer(ATTRIB_TEXCOORD, 2, GL_FLOAT, 0, 0, quadTextureData1);
+
         }
             break;
         case GLPhotoAnimationPushRight:
@@ -414,6 +435,8 @@ enum
             0.0 * scale + 0.2 * tween, 0.0,
             1.0 * scale + 0.2 * tween, 0.0,
         };
+		glVertexAttribPointer(ATTRIB_TEXCOORD, 2, GL_FLOAT, 0, 0, quadTextureData1);
+
         }
             break;
         case GLPhotoAnimationPushLeft:
@@ -424,6 +447,8 @@ enum
             0.2 * (1 - tween), 0.0,
             0.8 + 0.2 * (1 - tween), 0.0,
         };
+		glVertexAttribPointer(ATTRIB_TEXCOORD, 2, GL_FLOAT, 0, 0, quadTextureData1);
+
         }
             break;
         case GLPhotoAnimationPushScaleBig:
@@ -434,6 +459,8 @@ enum
             0.2 * tween,0.2 * tween,
             1.0 - 0.2 * tween, 0.2 * tween,
         };
+		glVertexAttribPointer(ATTRIB_TEXCOORD, 2, GL_FLOAT, 0, 0, quadTextureData1);
+
         }
             break;
         case GLPhotoAnimationPushScaleSmall:
@@ -444,6 +471,8 @@ enum
             0.2 * (1.0 - tween), 0.2 * (1.0 - tween),
             0.8 + 0.2 * tween, 0.2 * (1.0 - tween),
         };
+		glVertexAttribPointer(ATTRIB_TEXCOORD, 2, GL_FLOAT, 0, 0, quadTextureData1);
+
         }
             break;
         case GLPhotoAnimationNone:
@@ -452,7 +481,6 @@ enum
             break;
     }
     
-    glVertexAttribPointer(ATTRIB_TEXCOORD, 2, GL_FLOAT, 0, 0, quadTextureData1);
     glEnableVertexAttribArray(ATTRIB_TEXCOORD);
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
     glFlush();

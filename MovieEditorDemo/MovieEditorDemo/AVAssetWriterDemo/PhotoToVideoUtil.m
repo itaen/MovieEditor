@@ -171,7 +171,7 @@ typedef UIImage*(^CEMovieMakerUIImageExtractor)(NSObject* inputObject);
     CGFloat frameWidth = [[self.videoSettings objectForKey:AVVideoWidthKey] floatValue];
     CGFloat frameHeight = [[self.videoSettings objectForKey:AVVideoHeightKey] floatValue];
     
-    
+    //16 的整数倍
     CVReturn status = CVPixelBufferCreate(kCFAllocatorDefault,
                                           frameWidth,
                                           frameHeight,
