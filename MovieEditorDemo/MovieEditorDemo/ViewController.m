@@ -22,14 +22,6 @@
 
 @implementation ViewController
 
-- (void)viewWillAppear:(BOOL)animated {
-	[super viewWillAppear:animated];
-	if (self.videoPlayer.player) {
-		[self.videoPlayer setPlayer:[AVPlayer playerWithPlayerItem:nil]];
-	}
-}
-
-
 - (void)playVideoWithItem:(AVPlayerItem *)item {
     if (self.videoPlayer.player) {
         [self.videoPlayer.player replaceCurrentItemWithPlayerItem:item];
@@ -96,19 +88,19 @@
 #pragma mark - AVFoundation 单张图片转视频
 - (IBAction)avFoundationPhotoToVideo:(UIButton *)sender {  
     GLEditPhotoModel *model = [[GLEditPhotoModel alloc] init];
-    UIImage *image = [UIImage imageNamed:@"8.jpeg"];
+	UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"%u.jpeg",arc4random_uniform(10)]];
 
     model.resizePhotoData = UIImageJPEGRepresentation(image, 1.0);
     model.originPhotoData = UIImageJPEGRepresentation(image, 1.0);
-    model.duration = 8.f;
-    model.type = GLPhotoAnimationPushRight;
+    model.duration = 5.f;
+    model.type = GLPhotoAnimationNone;
     AVPlayerItem *item = [[GLMovieEditorBuilder shared] buildPhotoVideoWithPhoto:model];
 	
 	[self playVideoWithItem:item];
 	
 	//导出单个图片视频
-//	AVAssetExportSession *session = [[GLMovieEditorBuilder shared] exportPhotoWithModel:model];
-//	[self exportVideo:session];
+	AVAssetExportSession *session = [[GLMovieEditorBuilder shared] exportPhotoWithModel:model];
+	[self exportVideo:session];
 	
 
 }
@@ -143,20 +135,35 @@
 
 #pragma mark - 为视频增加转场
 - (IBAction)addTransitionsToVideo:(UIButton *)sender {
-    
+	[self combineDemoVideo];
+	[[GLMovieEditorBuilder shared].videoModels enumerateObjectsUsingBlock:^(GLEditVideoModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+		obj.transitionType = GLRenderTransisionTypeDissolve;
+	}];
+	[[GLMovieEditorBuilder shared] buildVideo];
+	AVPlayerItem *item = [[GLMovieEditorBuilder shared] playerItem];
+	[self playVideoWithItem:item];
 }
 
 #pragma mark - 为视频增加滤镜
 - (IBAction)addFilterToVideo:(UIButton *)sender {
-    
+	[self combineDemoVideo];
+	[[GLMovieEditorBuilder shared].videoModels enumerateObjectsUsingBlock:^(GLEditVideoModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+		obj.filterType = GLFilterTypeRio;
+	}];
+	[[GLMovieEditorBuilder shared] buildVideo];
+	AVPlayerItem *item = [[GLMovieEditorBuilder shared] playerItem];
+	[self playVideoWithItem:item];
 }
 
 
 #pragma mark - 清除容器资源
 
 - (IBAction)clearBuilderData:(UIButton *)sender {
-	[SVProgressHUD showSuccessWithStatus:@"数据重置成功！"];
 	[[GLMovieEditorBuilder shared] clearIfNeeded];
+	if (self.videoPlayer.player) {
+		[self.videoPlayer setPlayer:[AVPlayer playerWithPlayerItem:nil]];
+	}
+	[SVProgressHUD showSuccessWithStatus:@"数据重置成功！"];
 }
 
 #pragma mark - CMTime 例子

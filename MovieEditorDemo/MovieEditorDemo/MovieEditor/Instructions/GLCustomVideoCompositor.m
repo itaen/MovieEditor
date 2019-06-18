@@ -59,8 +59,8 @@
 {
     NSLog(@"change %@",newRenderContext);
     dispatch_sync(_renderContextQueue, ^() {
-        _renderContext = newRenderContext;
-        _renderContextDidChange = YES;
+		self->_renderContext = newRenderContext;
+		self->_renderContextDidChange = YES;
     });
 }
 
@@ -69,7 +69,7 @@
 	
         dispatch_async(_renderingQueue,^() {
 			@autoreleasepool {
-				if (_shouldCancelAllRequests) {
+				if (self->_shouldCancelAllRequests) {
 					[request finishCancelledRequest];
 				} else {
 					NSError *err = nil;
@@ -141,7 +141,7 @@ static Float64 factorForTimeInRange(CMTime time, CMTimeRange range) /* 0.0 -> 1.
     
     dispatch_barrier_async(_renderingQueue, ^() {
         
-        _shouldCancelAllRequests = NO;
+		self->_shouldCancelAllRequests = NO;
     });
 }
 

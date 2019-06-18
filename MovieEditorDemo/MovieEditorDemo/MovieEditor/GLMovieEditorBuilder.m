@@ -184,9 +184,18 @@
 		if (self.videoComposition.customVideoCompositorClass) {
 			
 			if (model.isLocal) {
-				CGSize size = compositionVideoTracks[index].naturalSize;
-				GLLocalVideoCompositionInstruction *instruction = [[GLLocalVideoCompositionInstruction alloc] initSourceTrackID:compositionVideoTracks[index].trackID forTimeRange:passThroughTimeRanges[i] rotateDegree:model.rotateDegree natureSize:size];
-				[instructions addObject:instruction];
+//				CGSize size = compositionVideoTracks[index].naturalSize;
+//				GLLocalVideoCompositionInstruction *instruction = [[GLLocalVideoCompositionInstruction alloc] initSourceTrackID:compositionVideoTracks[index].trackID forTimeRange:passThroughTimeRanges[i] rotateDegree:model.rotateDegree natureSize:size];
+//				[instructions addObject:instruction];
+//
+				
+				if (model.filterType == GLFilterTypeNone) {
+					GLPassthroughVideoCompositionInstruction *instruction = [[GLPassthroughVideoCompositionInstruction alloc] initPassThroughTrackID:compositionVideoTracks[index].trackID forTimeRange:passThroughTimeRanges[i]];
+					[instructions addObject:instruction];
+				}else{
+					GLFilterVideoCompositionInstruction *instruction = [[GLFilterVideoCompositionInstruction alloc] initSourceTrackID:compositionVideoTracks[index].trackID forTimeRange:passThroughTimeRanges[i] type:model.filterType];
+					[instructions addObject:instruction];
+				}
 				
 				if (i+1 < count) {
 					if (model.transitionType != GLRenderTransisionTypeNone) {
@@ -301,7 +310,7 @@
 		videoModel.asset = obj;
 		videoModel.isLocal = YES;
 		videoModel.transitionType = GLRenderTransisionTypeWipeHorizontal;
-		videoModel.filterType = GLFilterTypeAutumn;
+		videoModel.filterType = GLFilterTypeNone;
 		[videoModels addObject:videoModel];
 	}];
 	return [NSArray arrayWithArray:videoModels];
