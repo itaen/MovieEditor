@@ -27,8 +27,7 @@ typedef void(^MMMovieMakerCompletion)(NSURL *fileURL);
 
 - (instancetype)initWithSettings:(NSDictionary *)videoSettings;
 - (void)createMovieFromImages:(NSArray MMVideo_GENERIC_IMAGE*)images withCompletion:(MMMovieMakerCompletion)completion;
-- (void)getVideoOriginalImgPathWithImage:(UIImage *)image completion:(MMMovieMakerCompletion)completion;
-- (NSString *)cachePathWithName:(NSString *)name;
++ (NSString *)cachePathWithName:(NSString *)name;
 + (NSDictionary *)videoSettingsWithCodec:(NSString *)codec withWidth:(CGFloat)width andHeight:(CGFloat)height;
 
 

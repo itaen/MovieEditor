@@ -225,6 +225,31 @@
 			path = "Support Files";
 			sourceTree = "<group>";
 		};
+		B865DFDC22B87ADF0031CE8F /* glsl */ = {
+			isa = PBXGroup;
+			children = (
+				B8F0092922B7C17C00229B23 /* FilterFrag.glsl */,
+				B8F0092F22B7C17C00229B23 /* FilterVertex.glsl */,
+				B8F0092E22B7C17C00229B23 /* TransitionFrag.glsl */,
+				B8F0092722B7C17C00229B23 /* TransitionVertex.glsl */,
+			);
+			path = glsl;
+			sourceTree = "<group>";
+		};
+		B865DFDD22B87AED0031CE8F /* media */ = {
+			isa = PBXGroup;
+			children = (
+				B86235C922B62A3400E2CE33 /* demoImages */,
+				B8F0090B22B7B94800229B23 /* music1.m4a */,
+				B862360022B6A7EE00E2CE33 /* blank.mp4 */,
+				B8F0092D22B7C17C00229B23 /* color.png */,
+				B8F0092622B7C17C00229B23 /* color1.png */,
+				B8F0092822B7C17C00229B23 /* color2.png */,
+				B8F0092322B7C17C00229B23 /* filters */,
+			);
+			path = media;
+			sourceTree = "<group>";
+		};
 		B8F0090C22B7C17C00229B23 /* MovieEditorDemo */ = {
 			isa = PBXGroup;
 			children = (
@@ -242,10 +267,10 @@
 		B8F0090D22B7C17C00229B23 /* Instructions */ = {
 			isa = PBXGroup;
 			children = (
-				B8F0091A22B7C17C00229B23 /* GLBaseCustomVideoCompositionInsruction.h */,
-				B8F0091422B7C17C00229B23 /* GLBaseCustomVideoCompositionInsruction.m */,
 				B8F0090F22B7C17C00229B23 /* GLCustomVideoCompositor.h */,
 				B8F0091822B7C17C00229B23 /* GLCustomVideoCompositor.m */,
+				B8F0091A22B7C17C00229B23 /* GLBaseCustomVideoCompositionInsruction.h */,
+				B8F0091422B7C17C00229B23 /* GLBaseCustomVideoCompositionInsruction.m */,
 				B8F0091722B7C17C00229B23 /* GLFilterVideoCompositionInstruction.h */,
 				B8F0090E22B7C17C00229B23 /* GLFilterVideoCompositionInstruction.m */,
 				B8F0091022B7C17C00229B23 /* GLLocalPhotoCompositionInstruction.h */,
@@ -274,17 +299,8 @@
 		B8F0092222B7C17C00229B23 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				B86235C922B62A3400E2CE33 /* demoImages */,
-				B8F0090B22B7B94800229B23 /* music1.m4a */,
-				B862360022B6A7EE00E2CE33 /* blank.mp4 */,
-				B8F0092D22B7C17C00229B23 /* color.png */,
-				B8F0092622B7C17C00229B23 /* color1.png */,
-				B8F0092822B7C17C00229B23 /* color2.png */,
-				B8F0092922B7C17C00229B23 /* FilterFrag.glsl */,
-				B8F0092322B7C17C00229B23 /* filters */,
-				B8F0092F22B7C17C00229B23 /* FilterVertex.glsl */,
-				B8F0092E22B7C17C00229B23 /* TransitionFrag.glsl */,
-				B8F0092722B7C17C00229B23 /* TransitionVertex.glsl */,
+				B865DFDD22B87AED0031CE8F /* media */,
+				B865DFDC22B87ADF0031CE8F /* glsl */,
 			);
 			path = Resources;
 			sourceTree = "<group>";

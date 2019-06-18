@@ -11,7 +11,7 @@
 
 const CGFloat kTransitionTime  = 0.5;
 const CGFloat kPhotoVideoTime  = 3;
-const NSUInteger kPhotoVideoFPS  = 60;
+const int32_t kPhotoVideoFPS  = 60;
 
 NSNotificationName const GLMovieEditorNeedReloadDataNotification      = @"GLMovieEditorNeedReloadDataNotification";
 NSNotificationName const GLLocalPhotoRenderProgressNotification = @"GLLocalPhotoRenderProgressNotification";

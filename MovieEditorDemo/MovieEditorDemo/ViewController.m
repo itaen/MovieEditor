@@ -12,8 +12,7 @@
 #import <AVKit/AVKit.h>
 #import "GLEditPhotoModel.h"
 #import "GLEditConst.h"
-#import "GLLocalPhotoCompositionInstruction.h"
-#import "GLCustomVideoCompositor.h"
+#import "GLMovieEditorBuilder.h"
 
 @interface ViewController ()
 
@@ -35,8 +34,36 @@
     [self.navigationController pushViewController:self.videoPlayer animated:YES];
 }
 
+- (void)exportVideo:(AVURLAsset *)asset {
+	NSURL *outptVideoUrl = [NSURL fileURLWithPath:[PhotoToVideoUtil cachePathWithName: [NSString stringWithFormat:@"tempVideo-%d.mov",arc4random() % 1000]]];
+	AVAssetExportSession *exporter = [[AVAssetExportSession alloc] initWithAsset:asset presetName:AVAssetExportPreset1280x720];
+	
+	exporter.outputURL=outptVideoUrl;
+	exporter.outputFileType =AVFileTypeMPEG4;   //AVFileTypeQuickTimeMovie;
+	exporter.shouldOptimizeForNetworkUse = YES;
+	[SVProgressHUD show];
+	[exporter exportAsynchronouslyWithCompletionHandler:^{
+		dispatch_async(dispatch_get_main_queue(), ^{
+			if(exporter.status == AVAssetExportSessionStatusCompleted){
+				[SVProgressHUD dismiss];
+				//为了查看方便保存一份到相册
+				UISaveVideoAtPathToSavedPhotosAlbum(outptVideoUrl.relativePath, self, @selector(video:didFinishSavingWithError:contextInfo:), nil);
+			}
+		});
+	}];
+}
 
-//使用 AVAssetWriter 将图片写成视频
+- (void)video:(NSString *)videoPath didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInf{
+	if (error) {
+		[SVProgressHUD showErrorWithStatus:@"导出失败!"];
+		NSLog(@"保存视频过程中发生错误，错误信息:%@",error.localizedDescription);
+	}else{
+		[SVProgressHUD showSuccessWithStatus:@"视频导出成功,请在相册中查看!"];
+		NSLog(@"视频保存成功.");
+	}
+}
+
+#pragma mark - 使用 AVAssetWriter 将图片写成视频
 - (IBAction)exportVideoWithAssetWriter:(UIButton *)sender {
     //1.目标视频文件的格式和尺寸
     NSDictionary *options =  [PhotoToVideoUtil videoSettingsWithCodec:AVVideoCodecH264 withWidth:kPhotoVideoWidth andHeight:kPhotoVideoHeight];
@@ -47,13 +74,17 @@
     [util createMovieFromImages:[self demoImages] withCompletion:^(NSURL *fileURL) {
         [SVProgressHUD dismiss];
         //3.加载视频并展示
-        AVAsset *movieAsset = [AVURLAsset URLAssetWithURL:fileURL options:nil];
+        AVURLAsset *movieAsset = [AVURLAsset URLAssetWithURL:fileURL options:nil];
         AVPlayerItem *item = [AVPlayerItem playerItemWithAsset:movieAsset];
         [self playVideoWithItem:item];
+		UISaveVideoAtPathToSavedPhotosAlbum(fileURL.relativePath, self, @selector(video:didFinishSavingWithError:contextInfo:), nil);
 
+//		导出逻辑示范
+//		[self exportVideo:movieAsset];
     }];
 }
 
+#pragma mark - AVFoundation 单张图片转视频
 - (IBAction)avFoundationPhotoToVideo:(UIButton *)sender {
     GLEditPhotoModel *model = [[GLEditPhotoModel alloc] init];
     UIImage *image = [UIImage imageNamed:@"4.jpeg"];
@@ -62,42 +93,9 @@
     model.originPhotoData = UIImageJPEGRepresentation(image, 1.0);
     model.duration = 3.f;
     model.type = GLPhotoAnimationPushRight;
-    AVPlayerItem *item = [self buildPhotoVideoWithPhoto:model];
+    AVPlayerItem *item = [[GLMovieEditorBuilder shared] buildPhotoVideoWithPhoto:model];
     [self playVideoWithItem:item];
 
-}
-
-//单个图片转电影
-
-- (AVPlayerItem *)buildPhotoVideoWithPhoto:(GLEditPhotoModel *)model {
-    AVMutableComposition *composition = [AVMutableComposition composition];
-    AVMutableVideoComposition *videoComposition = [AVMutableVideoComposition videoComposition];
-    
-    [self setPhotoEditComposition:composition videoComposition:videoComposition PhotoModel:model];
-    AVPlayerItem *item = [[AVPlayerItem alloc] initWithAsset:composition];
-    item.videoComposition = videoComposition;
-    return item;
-}
-
-- (void)setPhotoEditComposition:(AVMutableComposition *)composition
-               videoComposition:(AVMutableVideoComposition *)videoComposition
-                     PhotoModel:(GLEditPhotoModel *)model{
-    AVMutableCompositionTrack *videoTrack = [composition addMutableTrackWithMediaType:AVMediaTypeVideo preferredTrackID:kCMPersistentTrackID_Invalid];
-    NSDictionary *options = @{AVURLAssetPreferPreciseDurationAndTimingKey:@YES};
-    AVURLAsset *asset = [AVURLAsset URLAssetWithURL:[[NSBundle mainBundle] URLForResource:@"blank" withExtension:@"mp4"] options:options];
-    AVAssetTrack *assetTrack = [[asset tracksWithMediaType:AVMediaTypeVideo] firstObject];
-    [videoTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, CMTimeMakeWithSeconds(model.duration, 1000)) ofTrack:assetTrack atTime:kCMTimeZero error:nil];
-    videoComposition.customVideoCompositorClass = [GLCustomVideoCompositor class];
-
-    GLLocalPhotoCompositionInstruction *instruction = [[GLLocalPhotoCompositionInstruction alloc] initSourceTrackID:assetTrack.trackID forTimeRange:CMTimeRangeMake(kCMTimeZero, CMTimeMakeWithSeconds(model.duration, 10000))];
-    
-    instruction.resizePhotoData = model.resizePhotoData;
-    instruction.animationType = model.type;
-    videoComposition.instructions = @[instruction];
-    videoComposition.frameDuration = CMTimeMake(1, kPhotoVideoFPS);
-
-    videoComposition.renderSize = CGSizeMake(kPhotoVideoWidth, kPhotoVideoHeight);
-    
 }
 
 
@@ -146,27 +144,6 @@
 
 //    item.videoComposition = videoComposition;
     [self playVideoWithItem:item];
-    
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSString *outputVideoPath =  [documentsDirectory stringByAppendingPathComponent:
-                                  [NSString stringWithFormat:@"mergeVideo-%d.mov",arc4random() % 1000]];
-
-	NSURL *outptVideoUrl = [NSURL fileURLWithPath:outputVideoPath];
-    AVAssetExportSession *exporter = [[AVAssetExportSession alloc] initWithAsset:mainComposition presetName:AVAssetExportPreset1280x720];
-
-    exporter.outputURL=outptVideoUrl;
-    exporter.outputFileType =AVFileTypeMPEG4;   //AVFileTypeQuickTimeMovie;
-    exporter.shouldOptimizeForNetworkUse = YES;
-	[SVProgressHUD show];
-	[exporter exportAsynchronouslyWithCompletionHandler:^{
-        dispatch_async(dispatch_get_main_queue(), ^{
-			if(exporter.status == AVAssetExportSessionStatusCompleted){
-				[SVProgressHUD dismiss];
-				UISaveVideoAtPathToSavedPhotosAlbum(outputVideoPath, nil, nil, nil);
-			}
-        });
-    }];
 }
 
 - (IBAction)addMultipleMusicTrackToVideo:(UIButton *)sender {

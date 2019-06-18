@@ -23,7 +23,7 @@ typedef UIImage*(^CEMovieMakerUIImageExtractor)(NSObject* inputObject);
 
 @implementation PhotoToVideoUtil
 
-- (NSString *)getCurrentDateString
++ (NSString *)getCurrentDateString
 {
     NSDate *currentTime = [NSDate date];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -34,7 +34,7 @@ typedef UIImage*(^CEMovieMakerUIImageExtractor)(NSObject* inputObject);
 
 
 
-- (NSString *)cachePathWithName:(NSString *)name
++ (NSString *)cachePathWithName:(NSString *)name
 {
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
 	NSString *documentsDirectory = [paths firstObject];
@@ -57,16 +57,6 @@ typedef UIImage*(^CEMovieMakerUIImageExtractor)(NSObject* inputObject);
 	return [covertedVideoPath copy];
 }
 
-- (void)getVideoOriginalImgPathWithImage:(UIImage *)image completion:(MMMovieMakerCompletion)completion
-{
-	NSData *imgData = UIImagePNGRepresentation(image);
-	NSString *destination = [self cachePathWithName:[[self getCurrentDateString] stringByAppendingPathExtension:@"png"]];
-	if ([imgData writeToFile:destination atomically:YES]) {
-		dispatch_async(dispatch_get_main_queue(), ^{
-			completion([NSURL URLWithString:destination]);
-		});
-	}
-}
 
 - (instancetype)initWithSettings:(NSDictionary *)videoSettings;
 {
@@ -75,7 +65,7 @@ typedef UIImage*(^CEMovieMakerUIImageExtractor)(NSObject* inputObject);
 
 		NSError *error;
 		
-		_fileURL = [NSURL fileURLWithPath:[self cachePathWithName:[[self getCurrentDateString] stringByAppendingPathExtension:@"mov"]]];
+		_fileURL = [NSURL fileURLWithPath:[PhotoToVideoUtil cachePathWithName:[[PhotoToVideoUtil getCurrentDateString] stringByAppendingPathExtension:@"mov"]]];
         _assetWriter = [[AVAssetWriter alloc] initWithURL:self.fileURL
                                                  fileType:AVFileTypeQuickTimeMovie error:&error];
         if (error) {

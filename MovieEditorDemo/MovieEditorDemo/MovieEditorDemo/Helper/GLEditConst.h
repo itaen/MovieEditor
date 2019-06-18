@@ -10,7 +10,7 @@
 
 UIKIT_EXTERN const CGFloat kTransitionTime;  // 转场时长
 UIKIT_EXTERN const CGFloat kPhotoVideoTime;  // 图片生成的视频时长
-UIKIT_EXTERN const NSUInteger kPhotoVideoFPS;  // 图片帧率
+UIKIT_EXTERN const int32_t kPhotoVideoFPS;  // 图片帧率
 UIKIT_EXTERN NSNotificationName const GLMovieEditorNeedReloadDataNotification;
 UIKIT_EXTERN NSNotificationName const GLLocalPhotoRenderProgressNotification;
 
