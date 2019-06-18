@@ -22,6 +22,14 @@
 
 @implementation ViewController
 
+- (void)viewWillAppear:(BOOL)animated {
+	[super viewWillAppear:animated];
+	if (self.videoPlayer.player) {
+		[self.videoPlayer setPlayer:[AVPlayer playerWithPlayerItem:nil]];
+	}
+}
+
+
 - (void)playVideoWithItem:(AVPlayerItem *)item {
     if (self.videoPlayer.player) {
         [self.videoPlayer.player replaceCurrentItemWithPlayerItem:item];
@@ -29,15 +37,14 @@
         [self.videoPlayer setPlayer:[AVPlayer playerWithPlayerItem:item]];
     }
     
-    
+	self.videoPlayer.player.actionAtItemEnd = AVPlayerActionAtItemEndNone;
     [self.videoPlayer.player play];
     [self.navigationController pushViewController:self.videoPlayer animated:YES];
 }
 
-- (void)exportVideo:(AVURLAsset *)asset {
+#pragma mark - AVAssetExportSession 导出例子
+- (void)exportVideo:(AVAssetExportSession *)exporter {
 	NSURL *outptVideoUrl = [NSURL fileURLWithPath:[PhotoToVideoUtil cachePathWithName: [NSString stringWithFormat:@"tempVideo-%d.mov",arc4random() % 1000]]];
-	AVAssetExportSession *exporter = [[AVAssetExportSession alloc] initWithAsset:asset presetName:AVAssetExportPreset1280x720];
-	
 	exporter.outputURL=outptVideoUrl;
 	exporter.outputFileType =AVFileTypeMPEG4;   //AVFileTypeQuickTimeMovie;
 	exporter.shouldOptimizeForNetworkUse = YES;
@@ -47,12 +54,13 @@
 			if(exporter.status == AVAssetExportSessionStatusCompleted){
 				[SVProgressHUD dismiss];
 				//为了查看方便保存一份到相册
-				UISaveVideoAtPathToSavedPhotosAlbum(outptVideoUrl.relativePath, self, @selector(video:didFinishSavingWithError:contextInfo:), nil);
+				UISaveVideoAtPathToSavedPhotosAlbum(exporter.outputURL.relativePath, self, @selector(video:didFinishSavingWithError:contextInfo:), nil);
 			}
 		});
 	}];
 }
 
+#pragma mark - 视频导出回调
 - (void)video:(NSString *)videoPath didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInf{
 	if (error) {
 		[SVProgressHUD showErrorWithStatus:@"导出失败!"];
@@ -80,102 +88,78 @@
 		UISaveVideoAtPathToSavedPhotosAlbum(fileURL.relativePath, self, @selector(video:didFinishSavingWithError:contextInfo:), nil);
 
 //		导出逻辑示范
-//		[self exportVideo:movieAsset];
+		AVAssetExportSession *exporter = [[AVAssetExportSession alloc] initWithAsset:movieAsset presetName:AVAssetExportPresetHighestQuality];
+		[self exportVideo:exporter];
     }];
 }
 
 #pragma mark - AVFoundation 单张图片转视频
-- (IBAction)avFoundationPhotoToVideo:(UIButton *)sender {
+- (IBAction)avFoundationPhotoToVideo:(UIButton *)sender {  
     GLEditPhotoModel *model = [[GLEditPhotoModel alloc] init];
-    UIImage *image = [UIImage imageNamed:@"4.jpeg"];
+    UIImage *image = [UIImage imageNamed:@"8.jpeg"];
 
     model.resizePhotoData = UIImageJPEGRepresentation(image, 1.0);
     model.originPhotoData = UIImageJPEGRepresentation(image, 1.0);
-    model.duration = 3.f;
+    model.duration = 8.f;
     model.type = GLPhotoAnimationPushRight;
     AVPlayerItem *item = [[GLMovieEditorBuilder shared] buildPhotoVideoWithPhoto:model];
-    [self playVideoWithItem:item];
+	
+	[self playVideoWithItem:item];
+	
+	//导出单个图片视频
+//	AVAssetExportSession *session = [[GLMovieEditorBuilder shared] exportPhotoWithModel:model];
+//	[self exportVideo:session];
+	
 
 }
 
-
+#pragma mark - 视频增加音轨
 - (IBAction)addMusicTrackToVideo:(UIButton *)sender {
-    
+	[[GLMovieEditorBuilder shared] clearIfNeeded];
+	NSURL *musicFile = [[NSBundle mainBundle] URLForResource:@"music1" withExtension:@"m4a"];
+	[self combineDemoVideo];
+    [GLMovieEditorBuilder shared].audioModels = [[GLMovieEditorBuilder shared] getLoopAudioArrays:musicFile.relativePath];
+	[[GLMovieEditorBuilder shared] buildVideo];
+	AVPlayerItem *item = [[GLMovieEditorBuilder shared] playerItem];
+	[self playVideoWithItem:item];
 }
 
-- (IBAction)addSubtitlesToVideo:(UIButton *)sender {
-    
+#pragma mark - 多个视频合并
+- (IBAction)mergeVideo:(UIButton *)sender {
+	[self combineDemoVideo];
+	AVPlayerItem *item = [[GLMovieEditorBuilder shared] playerItem];
+	[self playVideoWithItem:item];
 }
 
-- (IBAction)addWaterMarkToVideo:(UIButton *)sender {
-    
+- (void)combineDemoVideo {
+	NSDictionary *options = @{AVURLAssetPreferPreciseDurationAndTimingKey:@YES};
+	AVURLAsset *asset = [AVURLAsset URLAssetWithURL:[[NSBundle mainBundle] URLForResource:@"clip1" withExtension:@"mov"] options:options];
+	AVURLAsset *asset2 = [AVURLAsset URLAssetWithURL:[[NSBundle mainBundle] URLForResource:@"clip2" withExtension:@"mov"] options:options];
+	AVURLAsset *asset3 = [AVURLAsset URLAssetWithURL:[[NSBundle mainBundle] URLForResource:@"clip3" withExtension:@"mov"] options:options];
+	NSArray <GLEditVideoModel *> *videoModels = [GLMovieEditorBuilder GetEditVideoModels:@[asset,asset2,asset3]];
+	[[GLMovieEditorBuilder shared] buildVideoWithModels:videoModels];
 }
 
-- (IBAction)mergeTwoVideo:(UIButton *)sender {
-    NSDictionary *options = @{AVURLAssetPreferPreciseDurationAndTimingKey:@YES};
-    AVURLAsset *clipA = [AVURLAsset URLAssetWithURL:[[NSBundle mainBundle] URLForResource:@"clip1" withExtension:@"mov"] options:options];
-    AVURLAsset *clipB = [AVURLAsset URLAssetWithURL:[[NSBundle mainBundle] URLForResource:@"clip2" withExtension:@"mov"] options:options];
-    NSArray <AVURLAsset *> *assets = @[clipA,clipB];
-    
-    AVMutableComposition *mainComposition = [[AVMutableComposition alloc] init];
-    AVMutableCompositionTrack *compositionVideoTrack = [mainComposition addMutableTrackWithMediaType:AVMediaTypeVideo preferredTrackID:kCMPersistentTrackID_Invalid];
-    
-    
-//    AVMutableCompositionTrack *soundtrackTrack = [mainComposition addMutableTrackWithMediaType:AVMediaTypeAudio preferredTrackID:kCMPersistentTrackID_Invalid];
-    CMTime insertTime = kCMTimeZero;
-    
-    for (AVAsset *videoAsset in assets) {
-        
-        [compositionVideoTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, videoAsset.duration) ofTrack:[[videoAsset tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0] atTime:insertTime error:nil];
-        
-//        [soundtrackTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, videoAsset.duration) ofTrack:[[videoAsset tracksWithMediaType:AVMediaTypeAudio] objectAtIndex:0] atTime:insertTime error:nil];
-        
-        // Updating the insertTime for the next insert
-        insertTime = CMTimeAdd(insertTime, videoAsset.duration);
-    }
 
-    AVPlayerItem *item = [[AVPlayerItem alloc] initWithAsset:mainComposition];
-//    AVMutableVideoComposition *videoComposition = [AVMutableVideoComposition videoComposition];
-//    videoComposition.frameDuration = CMTimeMake(1, 60);
-//    AVMutableVideoCompositionInstruction *instruction = [AVMutableVideoCompositionInstruction videoCompositionInstruction];
-//    instruction.timeRange = CMTimeRangeMake(kCMTimeZero, [item duration]);
-//    videoComposition.instructions = @[instruction];
-//    videoComposition.renderSize = CGSizeMake(kPhotoVideoHeight, kPhotoVideoWidth);
-
-//    item.videoComposition = videoComposition;
-    [self playVideoWithItem:item];
-}
-
-- (IBAction)addMultipleMusicTrackToVideo:(UIButton *)sender {
-    
-}
-
+#pragma mark - 为视频增加转场
 - (IBAction)addTransitionsToVideo:(UIButton *)sender {
     
 }
 
+#pragma mark - 为视频增加滤镜
 - (IBAction)addFilterToVideo:(UIButton *)sender {
     
 }
 
 
+#pragma mark - 清除容器资源
 
-
--(AVPlayerViewController *)videoPlayer{
-    if(_videoPlayer==nil){
-        _videoPlayer = [[AVPlayerViewController alloc] init];
-        _videoPlayer.showsPlaybackControls = NO;
-        _videoPlayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
-        _videoPlayer.view.frame = [UIScreen mainScreen].bounds;
-        _videoPlayer.view.backgroundColor = [UIColor clearColor];
-        _videoPlayer.title = @"图片电影";
-        /** 获取音频焦点 */
-        [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
-        [[AVAudioSession sharedInstance] setActive:YES error:nil];
-    }
-    return _videoPlayer;
+- (IBAction)clearBuilderData:(UIButton *)sender {
+	[SVProgressHUD showSuccessWithStatus:@"数据重置成功！"];
+	[[GLMovieEditorBuilder shared] clearIfNeeded];
 }
 
+#pragma mark - CMTime 例子
 - (void)playWithCMTime {
     Float64 seconds = 5;
     int32_t preferredTimeScale = 600;
@@ -202,5 +186,22 @@
     }
     return [NSArray arrayWithArray:array];
 }
+
+
+-(AVPlayerViewController *)videoPlayer{
+	if(_videoPlayer==nil){
+		_videoPlayer = [[AVPlayerViewController alloc] init];
+		_videoPlayer.showsPlaybackControls = NO;
+		_videoPlayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
+		_videoPlayer.view.frame = [UIScreen mainScreen].bounds;
+		_videoPlayer.view.backgroundColor = [UIColor clearColor];
+		_videoPlayer.title = @"图片电影";
+		/** 获取音频焦点 */
+		[[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
+		[[AVAudioSession sharedInstance] setActive:YES error:nil];
+	}
+	return _videoPlayer;
+}
+
 
 @end
