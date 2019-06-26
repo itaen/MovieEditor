@@ -476,6 +476,7 @@ enum
         }
             break;
         case GLPhotoAnimationNone:
+            glVertexAttribPointer(ATTRIB_TEXCOORD, 2, GL_FLOAT, 0, 0, quadTextureData1);
         default:
             
             break;
