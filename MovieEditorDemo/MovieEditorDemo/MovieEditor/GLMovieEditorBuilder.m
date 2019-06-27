@@ -338,16 +338,6 @@
     return item;
 }
 
-- (AVAssetExportSession *)exportPhotoWithModel:(GLEditPhotoModel*)model {
-    AVMutableComposition *composition = [AVMutableComposition composition];
-    AVMutableVideoComposition *videoComposition = [AVMutableVideoComposition videoComposition];
-    [self setPhotoEditComposition:composition videoComposition:videoComposition PhotoModel:model];
-    NSString *presetName = AVAssetExportPresetHighestQuality;
-    AVAssetExportSession *session = [[AVAssetExportSession alloc] initWithAsset:composition presetName:presetName];
-    
-    session.videoComposition = videoComposition;
-    return session;
-}
 
 - (void)setPhotoEditComposition:(AVMutableComposition *)composition
                videoComposition:(AVMutableVideoComposition *)videoComposition
@@ -368,6 +358,18 @@
     videoComposition.renderSize = CGSizeMake(kPhotoVideoWidth, kPhotoVideoHeight);
   
 }
+
+- (AVAssetExportSession *)exportPhotoWithModel:(GLEditPhotoModel*)model {
+	AVMutableComposition *composition = [AVMutableComposition composition];
+	AVMutableVideoComposition *videoComposition = [AVMutableVideoComposition videoComposition];
+	[self setPhotoEditComposition:composition videoComposition:videoComposition PhotoModel:model];
+	NSString *presetName = AVAssetExportPresetHighestQuality;
+	AVAssetExportSession *session = [[AVAssetExportSession alloc] initWithAsset:composition presetName:presetName];
+	
+	session.videoComposition = videoComposition;
+	return session;
+}
+
 
 - (NSMutableArray<GLEditVideoModel *> *)videoModels {
     if (!_videoModels) {

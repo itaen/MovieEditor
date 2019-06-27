@@ -88,8 +88,10 @@ typedef UIImage*(^CEMovieMakerUIImageExtractor)(NSObject* inputObject);
         
         //声明输出视频格式相近的缓冲区属性。写入性能更好
         _bufferAdapter = [[AVAssetWriterInputPixelBufferAdaptor alloc] initWithAssetWriterInput:self.writerInput sourcePixelBufferAttributes:bufferAttributes];
-        
-        _frameTime = CMTimeMake(1, 1);
+		//https://www.jianshu.com/p/f02aad2e7ff5
+		//保证时间精度而设置的帧率，并不一定是视频最后实际的播放帧率。
+		//float 小数点后6位，double 小数点后15位
+        _frameTime = CMTimeMake(600, 600);
     }
     return self;
 }
@@ -172,6 +174,16 @@ typedef UIImage*(^CEMovieMakerUIImageExtractor)(NSObject* inputObject);
     CGFloat frameHeight = [[self.videoSettings objectForKey:AVVideoHeightKey] floatValue];
     
     //16 的整数倍
+	
+//	Why Video editing need width and height divisible by 16
+//	yes 16 is a good number for computers.
+//	To really simplify, digital video is encoded using 16x16 macroblocks (mostly)
+//	For lots of tech talk fun, google "16x16 Macroblock".
+//	The simplest and most thorough way to perform motion estimation is to evaluate every possible 16x16 region in the search area,
+//	and select the best match. Typically, a "sum of absolute differences" (SAD) or "sum of squared differences" (SSD) computation is used to determine how closely a candidate 16x16 region matches a macro block.
+//	The SAD or SSD is often computed for the luminance plane only,but can also include the chrominance planes.
+//	But this approach can be overly demanding on processors: exhaustively searching an area of 48x24 pixels requires over 8 billion arithmetic operations per second at QVGA (640x480) video resolution and a frame rate of 30 frames per second.
+	
     CVReturn status = CVPixelBufferCreate(kCFAllocatorDefault,
                                           frameWidth,
                                           frameHeight,

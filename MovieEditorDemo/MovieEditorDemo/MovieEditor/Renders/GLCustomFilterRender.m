@@ -365,7 +365,6 @@ enum
 
 -(void)renderPxielBuffer:(CVPixelBufferRef)destinationPixelBuffer usingSourceBuffer:(CVPixelBufferRef)sourcePixelBuffer time:(CGFloat)time photoData:(NSData *)photoData tween:(float)tween type:(GLPhotoAnimationType)type
 {
-	[[NSNotificationCenter defaultCenter] postNotificationName:GLLocalPhotoRenderProgressNotification object:@(tween) userInfo:@{@"imageData":photoData}];
     [EAGLContext setCurrentContext:self.currentContext];
     CVOpenGLESTextureRef destTexture       = [self sourceTextureForPixelBuffer:destinationPixelBuffer];
     glViewport(0, 0, kPhotoVideoWidth, kPhotoVideoHeight);

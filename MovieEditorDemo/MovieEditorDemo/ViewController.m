@@ -81,8 +81,8 @@
 		UISaveVideoAtPathToSavedPhotosAlbum(fileURL.relativePath, self, @selector(video:didFinishSavingWithError:contextInfo:), nil);
 
 //		导出逻辑示范
-		AVAssetExportSession *exporter = [[AVAssetExportSession alloc] initWithAsset:movieAsset presetName:AVAssetExportPresetHighestQuality];
-		[self exportVideo:exporter];
+//		AVAssetExportSession *exporter = [[AVAssetExportSession alloc] initWithAsset:movieAsset presetName:AVAssetExportPresetHighestQuality];
+//		[self exportVideo:exporter];
     }];
 }
 
@@ -94,14 +94,14 @@
 	UIImage *resizeImage = [image gl_drawImageAspectFitInSize:CGSizeMake(UIScreenWidth, UIScreenHeight) scale:2.f fillColor:[UIColor blackColor]];//使用默认色;
 	model.resizePhotoData = UIImageJPEGRepresentation(resizeImage,1.0);
     model.duration = 5.f;
-    model.type = GLPhotoAnimationNone;
+    model.type = GLPhotoAnimationPushScaleBig;
     AVPlayerItem *item = [[GLMovieEditorBuilder shared] buildPhotoVideoWithPhoto:model];
 	
 	[self playVideoWithItem:item];
 	
 	//导出单个图片视频
-	AVAssetExportSession *session = [[GLMovieEditorBuilder shared] exportPhotoWithModel:model];
-	[self exportVideo:session];
+//	AVAssetExportSession *session = [[GLMovieEditorBuilder shared] exportPhotoWithModel:model];
+//	[self exportVideo:session];
 	
 
 }
@@ -122,8 +122,8 @@
 	[self combineDemoVideo];
 	AVPlayerItem *item = [[GLMovieEditorBuilder shared] playerItem];
 	[self playVideoWithItem:item];
-	AVAssetExportSession *session  = [[GLMovieEditorBuilder shared] makeExportable];
-	[self exportVideo:session];
+//	AVAssetExportSession *session  = [[GLMovieEditorBuilder shared] makeExportable];
+//	[self exportVideo:session];
 }
 
 - (void)combineDemoVideo {
@@ -143,7 +143,7 @@
 - (IBAction)addTransitionsToVideo:(UIButton *)sender {
 	[self combineDemoVideo];
 	[[GLMovieEditorBuilder shared].videoModels enumerateObjectsUsingBlock:^(GLEditVideoModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-		obj.transitionType = GLRenderTransisionTypeWipeHorizontal;
+		obj.transitionType = GLRenderTransisionTypePixelize;
 	}];
 	[[GLMovieEditorBuilder shared] buildVideo];
 	AVPlayerItem *item = [[GLMovieEditorBuilder shared] playerItem];
@@ -154,7 +154,9 @@
 - (IBAction)addFilterToVideo:(UIButton *)sender {
 	[self combineDemoVideo];
 	[[GLMovieEditorBuilder shared].videoModels enumerateObjectsUsingBlock:^(GLEditVideoModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-		obj.filterType = GLFilterTypeRio;
+		obj.transitionType = GLRenderTransisionTypeNone;
+		obj.filterType = GLFilterTypeOldSchool;
+		
 	}];
 	[[GLMovieEditorBuilder shared] buildVideo];
 	AVPlayerItem *item = [[GLMovieEditorBuilder shared] playerItem];
