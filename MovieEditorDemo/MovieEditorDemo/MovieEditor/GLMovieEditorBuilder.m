@@ -111,6 +111,7 @@
     NSInteger i;
     AVMutableCompositionTrack *compositionVideoTracks[2];
 
+	//在同一个 composition track 中添加多个视频段时，当视频段之间切换时可能会丢帧，尤其在嵌入式设备上。基于这个问题，应该合理选择一个 composition track 里的视频段数量。
     compositionVideoTracks[0] = [self.composition addMutableTrackWithMediaType:AVMediaTypeVideo preferredTrackID:kCMPersistentTrackID_Invalid];
     if (dataModels.count > 1) {
         compositionVideoTracks[1] = [self.composition addMutableTrackWithMediaType:AVMediaTypeVideo preferredTrackID:kCMPersistentTrackID_Invalid];
@@ -221,8 +222,6 @@
 	
     self.videoComposition.frameDuration = CMTimeMake(1, kPhotoVideoFPS);
     self.videoComposition.renderSize = CGSizeMake(kPhotoVideoWidth, kPhotoVideoHeight);
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:GLMovieEditorNeedReloadDataNotification object:nil];
 }
 
 - (AVMutableCompositionTrack *)addCompositionTrackOfType:(NSString *)mediaType
@@ -475,5 +474,18 @@
 								 videoCompositionCoreAnimationToolWithPostProcessingAsVideoLayer:videoLayer inLayer:parentLayer];
 	
 }
+
+//CALayer *watermarkLayer = ;
+//CALayer *parentLayer = [CALayer layer];
+//CALayer *videoLayer = [CALayer layer];
+//parentLayer.frame = CGRectMake(0, 0, mutableVideoComposition.renderSize.width, mutableVideoComposition.renderSize.height);
+//videoLayer.frame = CGRectMake(0, 0, mutableVideoComposition.renderSize.width, mutableVideoComposition.renderSize.height);
+//[parentLayer addSublayer:videoLayer];
+//watermarkLayer.position = CGPointMake(mutableVideoComposition.renderSize.width/2, mutableVideoComposition.renderSize.height/4);
+//[parentLayer addSublayer:watermarkLayer];
+//mutableVideoComposition.animationTool = [AVVideoCompositionCoreAnimationTool videoCompositionCoreAnimationToolWithPostProcessingAsVideoLayer:videoLayer inLayer:parentLayer];
+
+
+//Layer的instructions(AVMutableVideoCompositionLayerInstruction)可以对video track实现渐变,渐变变换,透明度, 透明度变换等效果
 
 @end
