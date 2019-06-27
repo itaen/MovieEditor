@@ -101,7 +101,8 @@ enum
     glAttachShader(_program, vertShader);
     
     glAttachShader(_program, fragShader);
-    
+	
+	//index binding
     glBindAttribLocation(_program, ATTRIB_VERTEX, "position");
     glBindAttribLocation(_program, ATTRIB_TEXCOORD, "texCoord");
     
@@ -376,12 +377,13 @@ enum
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
     glUseProgram(_program);
-    
+	
+	//代表四个顶点
     GLfloat quadVertexData1 [] = {
-        -1.0, 1.0,
-        1.0, 1.0,
-        -1.0, -1.0,
-        1.0, -1.0,
+        -1.0, 1.0,//左上角
+        1.0, 1.0,//右上角
+        -1.0, -1.0,//左下角
+        1.0, -1.0,//右下角
     };
     
 
@@ -389,9 +391,10 @@ enum
         [self setupPhotoTexture:photoData];
     }
     glUniform1i(filetUnforms[UNIFORM_SIMPLER], 0);
-    //glUniform1i(filetUnforms[UNIFORM_SIMPLER2], 1);
     glUniform1i(filetUnforms[UNIFORM_TYPE], -1);
-    glVertexAttribPointer(ATTRIB_VERTEX, 2, GL_FLOAT, 0, 0, quadVertexData1);
+	//CPU数据上传至GPU
+	glVertexAttribPointer(ATTRIB_VERTEX, 2, GL_FLOAT, 0, 0, quadVertexData1);
+	//glEnableVertexAttribArray启用指定属性.允许顶点着色器读取GPU（服务器端）数据
     glEnableVertexAttribArray(ATTRIB_VERTEX);
     
 //    GLPhotoAnimationNone = - 1,//无效果
@@ -404,12 +407,26 @@ enum
     switch (type) {
         case GLPhotoAnimationPushBottom:
         {
+		//
         GLfloat quadTextureData1 [] = {
-            0.0, 0.75 + 0.25 * tween,
-            1.0, 0.75 + 0.25 * tween,
-            0.0, 0.25 * tween,
-            1.0, 0.25 * tween,
+            0.0, 0.75 + 0.25 * tween,//(0,0.75) -> (0,1)
+            1.0, 0.75 + 0.25 * tween,//(1,0.75) -> (1,1)
+            0.0, 0.25 * tween,		 //(0,0)    -> (0,0.25)
+            1.0, 0.25 * tween,		 //(1,0)    -> (1,0.25)
         };
+		
+		// 使用glVertexAttribPointer函数告诉OpenGL该如何解析顶点数据
+		/*
+		 第一个参数GLuint indx:指定要配置的顶点属性，设置数据传递到指定位置顶点属性中
+		 第二个参数GLint size：指定顶点属性的大小
+		 第三个参数GLenum type：指定数据的类型，这里是GL_FLOAT(GLSL中vec*都是由浮点数值组成的)
+		 第四个参数GLboolean normalized：定义数据是否被标准化(Normalize)。如果设置为GL_TRUE，所有数据都会被映射到0（对于有符号型signed数据是-1）到1之间。因为我们传入的数据就是标准化数据，所以我们把它设置为GL_FALSE
+		 第五个参数GLsizei stride：设置连续的顶点属性组之间的间隔。由于下个组位置数据在3个float之后，
+		 我们把步长设置为3 * sizeof(float)。要注意的是由于我们知道这个数组是紧密排列的（在两个顶点属性之间没有空隙）我们也可以设置为0来让OpenGL决定具体步长是多少（只有当数值是紧密排列时才可用）。
+		 一旦我们有更多的顶点属性，我们就必须更小心地定义每个顶点属性之间的间隔，我们在后面会看到更多的例子
+		 （这个参数的意思简单说就是从这个属性第二次出现的地方到整个数组0位置之间有多少字节）
+		 最后一个参数const GLvoid *ptr：类型是void*，所以需要我们进行这个奇怪的强制类型转换。它表示位置数据在缓冲中起始位置的偏移量(Offset)。由于位置数据在数组的开头，所以这里是0。
+		 */
 		glVertexAttribPointer(ATTRIB_TEXCOORD, 2, GL_FLOAT, 0, 0, quadTextureData1);
         }
             break;
@@ -609,6 +626,7 @@ bail:
     
 }
 
+//生成纹理对象
 - (GLuint)setupPhotoTexture:(NSData *)photoData{
     self.isFirst = NO;
 	
@@ -638,7 +656,8 @@ bail:
 //    glEnable(GL_TEXTURE_2D);
     glGenTextures(1, &texture);
     glBindTexture(GL_TEXTURE_2D, texture);
-    
+	
+	//二维纹理映射
     glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
     glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
     glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);

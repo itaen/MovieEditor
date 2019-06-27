@@ -331,7 +331,6 @@
 - (AVPlayerItem *)buildPhotoVideoWithPhoto:(GLEditPhotoModel *)model {
     AVMutableComposition *composition = [AVMutableComposition composition];
     AVMutableVideoComposition *videoComposition = [AVMutableVideoComposition videoComposition];
-    
     [self setPhotoEditComposition:composition videoComposition:videoComposition PhotoModel:model];
     AVPlayerItem *item = [[AVPlayerItem alloc] initWithAsset:composition];
     item.videoComposition = videoComposition;
@@ -347,7 +346,9 @@
     AVURLAsset *asset = [AVURLAsset URLAssetWithURL:[[NSBundle mainBundle] URLForResource:@"blank" withExtension:@"mp4"] options:options];
     AVAssetTrack *assetTrack = [[asset tracksWithMediaType:AVMediaTypeVideo] firstObject];
     [videoTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, CMTimeMakeWithSeconds(model.duration, 1000)) ofTrack:assetTrack atTime:kCMTimeZero error:nil];
-    videoComposition.customVideoCompositorClass = [GLCustomVideoCompositor class];
+	
+	//重点
+	videoComposition.customVideoCompositorClass = [GLCustomVideoCompositor class];
     GLLocalPhotoCompositionInstruction *instruction = [[GLLocalPhotoCompositionInstruction alloc] initSourceTrackID:assetTrack.trackID forTimeRange:CMTimeRangeMake(kCMTimeZero, CMTimeMakeWithSeconds(model.duration, 1000))];
 
     instruction.resizePhotoData = model.resizePhotoData;

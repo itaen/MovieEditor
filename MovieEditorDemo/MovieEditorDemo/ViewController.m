@@ -94,7 +94,7 @@
 	UIImage *resizeImage = [image gl_drawImageAspectFitInSize:CGSizeMake(UIScreenWidth, UIScreenHeight) scale:2.f fillColor:[UIColor blackColor]];//使用默认色;
 	model.resizePhotoData = UIImageJPEGRepresentation(resizeImage,1.0);
     model.duration = 5.f;
-    model.type = GLPhotoAnimationPushScaleBig;
+    model.type = GLPhotoAnimationPushBottom;
     AVPlayerItem *item = [[GLMovieEditorBuilder shared] buildPhotoVideoWithPhoto:model];
 	
 	[self playVideoWithItem:item];
