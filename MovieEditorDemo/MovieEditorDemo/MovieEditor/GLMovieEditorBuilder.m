@@ -16,6 +16,7 @@
 #import "GLFilterVideoCompositionInstruction.h"
 #import "GLPassthroughVideoCompositionInstruction.h"
 
+
 @interface GLMovieEditorBuilder ()
 
 @property (nonatomic, strong) AVMutableComposition      *composition;

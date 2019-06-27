@@ -36,6 +36,9 @@
 		B865DFE522B8CF110031CE8F /* music1.m4a in Resources */ = {isa = PBXBuildFile; fileRef = B8F0090B22B7B94800229B23 /* music1.m4a */; };
 		B865DFE822B8ED930031CE8F /* clip4.mov in Resources */ = {isa = PBXBuildFile; fileRef = B865DFE622B8ED930031CE8F /* clip4.mov */; };
 		B865DFE922B8ED930031CE8F /* clip5.mov in Resources */ = {isa = PBXBuildFile; fileRef = B865DFE722B8ED930031CE8F /* clip5.mov */; };
+		B8CDB4CC22C46D800037724C /* UIImage+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = B8CDB4CB22C46D800037724C /* UIImage+Extension.m */; };
+		B8CDB4CF22C46EFE0037724C /* clip0.mov in Resources */ = {isa = PBXBuildFile; fileRef = B8CDB4CD22C46EFE0037724C /* clip0.mov */; };
+		B8CDB4D022C46EFE0037724C /* clip6.mov in Resources */ = {isa = PBXBuildFile; fileRef = B8CDB4CE22C46EFE0037724C /* clip6.mov */; };
 		B8F0096322B7C17C00229B23 /* GLFilterVideoCompositionInstruction.m in Sources */ = {isa = PBXBuildFile; fileRef = B8F0090E22B7C17C00229B23 /* GLFilterVideoCompositionInstruction.m */; };
 		B8F0096422B7C17C00229B23 /* GLPassthroughVideoCompositionInstruction.m in Sources */ = {isa = PBXBuildFile; fileRef = B8F0091222B7C17C00229B23 /* GLPassthroughVideoCompositionInstruction.m */; };
 		B8F0096522B7C17C00229B23 /* GLBaseCustomVideoCompositionInsruction.m in Sources */ = {isa = PBXBuildFile; fileRef = B8F0091422B7C17C00229B23 /* GLBaseCustomVideoCompositionInsruction.m */; };
@@ -102,6 +105,10 @@
 		B865DFE022B8B49E0031CE8F /* clip1.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = clip1.mov; sourceTree = "<group>"; };
 		B865DFE622B8ED930031CE8F /* clip4.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = clip4.mov; sourceTree = "<group>"; };
 		B865DFE722B8ED930031CE8F /* clip5.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = clip5.mov; sourceTree = "<group>"; };
+		B8CDB4CA22C46D800037724C /* UIImage+Extension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+Extension.h"; sourceTree = "<group>"; };
+		B8CDB4CB22C46D800037724C /* UIImage+Extension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Extension.m"; sourceTree = "<group>"; };
+		B8CDB4CD22C46EFE0037724C /* clip0.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = clip0.mov; sourceTree = "<group>"; };
+		B8CDB4CE22C46EFE0037724C /* clip6.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = clip6.mov; sourceTree = "<group>"; };
 		B8F0090B22B7B94800229B23 /* music1.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = music1.m4a; sourceTree = "<group>"; };
 		B8F0090E22B7C17C00229B23 /* GLFilterVideoCompositionInstruction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLFilterVideoCompositionInstruction.m; sourceTree = "<group>"; };
 		B8F0090F22B7C17C00229B23 /* GLCustomVideoCompositor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLCustomVideoCompositor.h; sourceTree = "<group>"; };
@@ -270,6 +277,8 @@
 				B865DFDF22B8B49D0031CE8F /* clip3.mov */,
 				B865DFE622B8ED930031CE8F /* clip4.mov */,
 				B865DFE722B8ED930031CE8F /* clip5.mov */,
+				B8CDB4CE22C46EFE0037724C /* clip6.mov */,
+				B8CDB4CD22C46EFE0037724C /* clip0.mov */,
 			);
 			path = demoVideo;
 			sourceTree = "<group>";
@@ -363,6 +372,8 @@
 				B8F0096022B7C17C00229B23 /* GLEditEnums.h */,
 				B8F0095F22B7C17C00229B23 /* GLMovieEditorUtil.h */,
 				B8F0096222B7C17C00229B23 /* GLMovieEditorUtil.m */,
+				B8CDB4CA22C46D800037724C /* UIImage+Extension.h */,
+				B8CDB4CB22C46D800037724C /* UIImage+Extension.m */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -440,6 +451,7 @@
 				B86235E922B62E1100E2CE33 /* 8.jpeg in Resources */,
 				B86235E822B62E1100E2CE33 /* 7.jpeg in Resources */,
 				B865DFE822B8ED930031CE8F /* clip4.mov in Resources */,
+				B8CDB4D022C46EFE0037724C /* clip6.mov in Resources */,
 				B8F0096D22B7C17C00229B23 /* lookup_amatorka.png in Resources */,
 				B8F0096F22B7C17C00229B23 /* color1.png in Resources */,
 				B862360122B6AA4F00E2CE33 /* blank.mp4 in Resources */,
@@ -455,6 +467,7 @@
 				B865DFE122B8B49E0031CE8F /* clip2.mov in Resources */,
 				B86235DB22B62A4A00E2CE33 /* 1.jpeg in Resources */,
 				B8F0097822B7C17C00229B23 /* FilterVertex.glsl in Resources */,
+				B8CDB4CF22C46EFE0037724C /* clip0.mov in Resources */,
 				B86235E622B62E1100E2CE33 /* 6.jpeg in Resources */,
 				B865DFE322B8B49E0031CE8F /* clip1.mov in Resources */,
 				B865DFE922B8ED930031CE8F /* clip5.mov in Resources */,
@@ -494,6 +507,7 @@
 				B8F0096B22B7C17C00229B23 /* GLCustomTransitionRender.m in Sources */,
 				B86235C422B6285700E2CE33 /* SVProgressAnimatedView.m in Sources */,
 				B862359B22B5E9C200E2CE33 /* AppDelegate.m in Sources */,
+				B8CDB4CC22C46D800037724C /* UIImage+Extension.m in Sources */,
 				B8F0097922B7C17C00229B23 /* GLEditPhotoModel.m in Sources */,
 				B8F0096422B7C17C00229B23 /* GLPassthroughVideoCompositionInstruction.m in Sources */,
 				B8F0097A22B7C17C00229B23 /* GLEditBaseModel.m in Sources */,

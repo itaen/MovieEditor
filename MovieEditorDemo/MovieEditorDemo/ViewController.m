@@ -13,6 +13,7 @@
 #import "GLEditPhotoModel.h"
 #import "GLEditConst.h"
 #import "GLMovieEditorBuilder.h"
+#import "UIImage+Extension.h"
 
 @interface ViewController ()
 
@@ -89,9 +90,9 @@
 - (IBAction)avFoundationPhotoToVideo:(UIButton *)sender {  
     GLEditPhotoModel *model = [[GLEditPhotoModel alloc] init];
 	UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"%u.jpeg",arc4random_uniform(10)]];
-
-    model.resizePhotoData = UIImageJPEGRepresentation(image, 1.0);
     model.originPhotoData = UIImageJPEGRepresentation(image, 1.0);
+	UIImage *resizeImage = [image gl_drawImageAspectFitInSize:CGSizeMake(UIScreenWidth, UIScreenHeight) scale:2.f fillColor:[UIColor blackColor]];//使用默认色;
+	model.resizePhotoData = UIImageJPEGRepresentation(resizeImage,1.0);
     model.duration = 5.f;
     model.type = GLPhotoAnimationNone;
     AVPlayerItem *item = [[GLMovieEditorBuilder shared] buildPhotoVideoWithPhoto:model];
@@ -121,14 +122,19 @@
 	[self combineDemoVideo];
 	AVPlayerItem *item = [[GLMovieEditorBuilder shared] playerItem];
 	[self playVideoWithItem:item];
+	AVAssetExportSession *session  = [[GLMovieEditorBuilder shared] makeExportable];
+	[self exportVideo:session];
 }
 
 - (void)combineDemoVideo {
+	NSMutableArray <AVURLAsset *> *models = [NSMutableArray arrayWithCapacity:7];
 	NSDictionary *options = @{AVURLAssetPreferPreciseDurationAndTimingKey:@YES};
-	AVURLAsset *asset = [AVURLAsset URLAssetWithURL:[[NSBundle mainBundle] URLForResource:@"clip1" withExtension:@"mov"] options:options];
-	AVURLAsset *asset2 = [AVURLAsset URLAssetWithURL:[[NSBundle mainBundle] URLForResource:@"clip2" withExtension:@"mov"] options:options];
-	AVURLAsset *asset3 = [AVURLAsset URLAssetWithURL:[[NSBundle mainBundle] URLForResource:@"clip3" withExtension:@"mov"] options:options];
-	NSArray <GLEditVideoModel *> *videoModels = [GLMovieEditorBuilder GetEditVideoModels:@[asset,asset2,asset3]];
+	for (int i = 0; i < 7; i++) {
+		NSString *name = [NSString stringWithFormat:@"clip%d",i];
+		AVURLAsset *asset = [AVURLAsset URLAssetWithURL:[[NSBundle mainBundle] URLForResource:name withExtension:@"mov"] options:options];
+		[models addObject:asset];
+	}
+	NSArray <GLEditVideoModel *> *videoModels = [GLMovieEditorBuilder GetEditVideoModels:[NSArray arrayWithArray:models]];
 	[[GLMovieEditorBuilder shared] buildVideoWithModels:videoModels];
 }
 
@@ -137,7 +143,7 @@
 - (IBAction)addTransitionsToVideo:(UIButton *)sender {
 	[self combineDemoVideo];
 	[[GLMovieEditorBuilder shared].videoModels enumerateObjectsUsingBlock:^(GLEditVideoModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-		obj.transitionType = GLRenderTransisionTypeDissolve;
+		obj.transitionType = GLRenderTransisionTypeWipeHorizontal;
 	}];
 	[[GLMovieEditorBuilder shared] buildVideo];
 	AVPlayerItem *item = [[GLMovieEditorBuilder shared] playerItem];
