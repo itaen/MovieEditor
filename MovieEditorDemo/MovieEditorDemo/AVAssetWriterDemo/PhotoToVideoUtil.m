@@ -124,40 +124,39 @@ typedef UIImage*(^CEMovieMakerUIImageExtractor)(NSObject* inputObject);
     NSInteger frameNumber = [images count];
     
     [self.writerInput requestMediaDataWhenReadyOnQueue:mediaInputQueue usingBlock:^{
+		if ([self.writerInput isReadyForMoreMediaData]) {
+			UIImage* img = extractor([images objectAtIndex:i]);
+			if (img == nil) {
+				i++;
+				NSLog(@"Warning: could not extract one of the frames");
+			}
+			CVPixelBufferRef sampleBuffer = [self newPixelBufferFromCGImage:[img CGImage]];
+			
+			if (sampleBuffer) {
+				if (i == 0) {
+					[self.bufferAdapter appendPixelBuffer:sampleBuffer withPresentationTime:kCMTimeZero];
+				}else{
+					CMTime lastTime = CMTimeMake((i-1)*self.frameTime.value, self.frameTime.timescale);
+					CMTime presentTime = CMTimeAdd(lastTime, self.frameTime);
+					[self.bufferAdapter appendPixelBuffer:sampleBuffer withPresentationTime:presentTime];
+				}
+				CVPixelBufferRelease(sampleBuffer);
+				i++;
+			}
+		}
+		
+		if (i >= frameNumber) {
+			[self.writerInput markAsFinished];
+			[self.assetWriter finishWritingWithCompletionHandler:^{
+				dispatch_async(dispatch_get_main_queue(), ^{
+					self.completionBlock(self.fileURL);
+				});
+			}];
+			
+			CVPixelBufferPoolRelease(self.bufferAdapter.pixelBufferPool);
+		}
         
-        while (i < frameNumber){
-            
-            if ([self.writerInput isReadyForMoreMediaData]) {
-                UIImage* img = extractor([images objectAtIndex:i]);
-                if (img == nil) {
-                    i++;
-                    NSLog(@"Warning: could not extract one of the frames");
-                    continue;
-                }
-                CVPixelBufferRef sampleBuffer = [self newPixelBufferFromCGImage:[img CGImage]];
-                
-                if (sampleBuffer) {
-                    if (i == 0) {
-                        [self.bufferAdapter appendPixelBuffer:sampleBuffer withPresentationTime:kCMTimeZero];
-                    }else{
-                        CMTime lastTime = CMTimeMake((i-1)*self.frameTime.value, self.frameTime.timescale);
-                        CMTime presentTime = CMTimeAdd(lastTime, self.frameTime);
-                        [self.bufferAdapter appendPixelBuffer:sampleBuffer withPresentationTime:presentTime];
-                    }
-                    CVPixelBufferRelease(sampleBuffer);
-                    i++;
-                }
-            }
-        }
-        
-        [self.writerInput markAsFinished];
-        [self.assetWriter finishWritingWithCompletionHandler:^{
-			dispatch_async(dispatch_get_main_queue(), ^{
-                self.completionBlock(self.fileURL);
-            });
-        }];
-        
-        CVPixelBufferPoolRelease(self.bufferAdapter.pixelBufferPool);
+
     }];
 }
 
